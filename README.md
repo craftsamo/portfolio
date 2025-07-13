@@ -11,6 +11,7 @@ practices and curated configurations.
 - [Internal Packages](#internal-packages)
 - [Branch Strategy](#branch-strategy)
 - [Sync Label](#sync-labels)
+- [Releases](#releases)
 - [Commit Rules](#commit-rules)
 
 ## Installation
@@ -90,6 +91,11 @@ branch descriptions, and merge methods.
 Automates the synchronization of labels with the repository. Refer to
 [sync labels documentation](docs/sync-labels.md) for configuration and
 workflows.
+
+## Releases
+
+This project includes a workflow that automatically generates release notes. For
+more details, refer to [releases](/docs/releases.md).
 
 ## Commit Rules
 

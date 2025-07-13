@@ -24,6 +24,11 @@
   description: "This will not be worked on"
   color: "CFD3D7"
 
+## Version Resolver
+- name: "🌟major"
+  description: "Indicates a major release update"
+  color: "FBCA04"
+
 ## Apps
 - name: "🌐app: web"
   description: "Web application"
