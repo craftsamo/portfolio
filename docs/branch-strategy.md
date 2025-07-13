@@ -10,10 +10,15 @@
 | --------- | --------------------------------------------------------- | ------------- | ------------ |
 | main      | A stable branch that maintains the production environment | None          | None         |
 | develop   | A branch for integrating code under development           | main          | main         |
-| feat/\*   | A branch used for developing new features                 | develop       | develop      |
+| <type>/\* | A branch used for developing new <type>                   | develop       | develop      |
 | hotfix/\* | A branch used for urgent bug fixes                        | main          | main         |
 
-...
+**The following values can be used for <type>**:
+
+- feat
+- enhance
+- fix
+- doc
 
 ## Workflow
 
