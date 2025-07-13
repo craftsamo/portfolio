@@ -18,7 +18,7 @@ jobs:
           branch_type=$(echo ${{ github.head_ref }} | cut -d "/" -f1)
           if [ $branch_type == 'feat' ]; then
             label_name="🌱feature"
-          elif [$branch_type == 'enhance']; then
+          elif [ $branch_type == 'enhance' ]; then
             label_name="⚒️enhancement"
           elif [ $branch_type == 'docs' ]; then
             label_name="📝documentation"
