@@ -10,6 +10,7 @@ practices and curated configurations.
 - [Usage](#usage)
 - [Internal Packages](#internal-packages)
 - [Branch Strategy](#branch-strategy)
+- [Sync Label](#sync-labels)
 - [Commit Rules](#commit-rules)
 
 ## Installation
@@ -83,6 +84,12 @@ purposes:
 
 Refer to the [branch strategy](docs/branch-strategy.md) for detailed workflows,
 branch descriptions, and merge methods.
+
+## Sync Labels
+
+Automates the synchronization of labels with the repository. Refer to
+[sync labels documentation](docs/sync-labels.md) for configuration and
+workflows.
 
 ## Commit Rules
 
