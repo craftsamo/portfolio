@@ -20,6 +20,8 @@ jobs:
             label_name="🌱feature"
           elif [$branch_type == 'enhance']; then
             label_name="⚒️enhancement"
+          elif [ $branch_type == 'docs' ]; then
+            label_name="📝documentation"
           elif [ $branch_type == 'fix' ]; then
             label_name="🐛bug"
           elif [ $branch_type == 'hotfix' ]; then

@@ -18,7 +18,7 @@
 - feat
 - enhance
 - fix
-- doc
+- docs
 
 ## Workflow
 
