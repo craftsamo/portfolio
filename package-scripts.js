@@ -31,6 +31,12 @@ module.exports = {
         web: "cd out && npm run build",
       },
     },
+    docker: {
+      build: {
+        default: "nps docker.build.web",
+        web: `docker build -t web . -f ${webPath}/Dockerfile`,
+      },
+    },
     start: {
       web: "docker compose -f docker-compose.web.yml up --build",
     },
