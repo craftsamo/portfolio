@@ -1,4 +1,4 @@
-name: Deployment
+name: Display details
 
 on:
   workflow_dispatch:
