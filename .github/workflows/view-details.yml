@@ -1,0 +1,30 @@
+name: Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      guthub_event_name:
+        type: choice
+        options:
+          - pull_request
+          - push
+          - issue_comment
+        description: Type of Github Action event
+        required: false
+
+jobs:
+  execute-get-details:
+    name: Execute get details workflow
+    uses: ./.github/workflows/get-details.yml
+
+  view-details:
+    name: Execute get details workflow
+    runs-on: ubuntu-latest
+    needs: [execute-get-details]
+    timeout-minutes: 1
+    steps:
+      - name: Print details
+        run: |
+          echo "Project Name: ${{ needs.execute-get-details.outputs.project_name }}"
+          echo "Apps Details: ${{ needs.execute-get-details.outputs.apps }}"
+          echo "Repository Information: ${{ needs.execute-get-details.outputs.repository }}"
