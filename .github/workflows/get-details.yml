@@ -49,7 +49,7 @@ jobs:
           app_details=$(find apps -name "package.json" | while read -r file; do
             jq -c '{name: .name, version: .version, lowercase_version: (.version | gsub("\\."; "-"))}' "$file"
           done | jq -s .)
-          echo "details=$app_details" >> $GITHUB_OUTPUT
+          echo "app_details='${app_details}'" >> $GITHUB_OUTPUT
 
   #############################################################################
   #  Get repository details                                                   #
@@ -97,11 +97,16 @@ jobs:
       - name: Generate repository details
         id: generate-repo-details
         run: |
-          details=$(jq -n --arg repo_name "$repo_name" --arg repo_name_lowercase "$repo_name_lowercase" \
-            --arg repo_owner "$repo_owner" --arg repo_owner_lowercase "$repo_owner_lowercase" \
-            --arg ref_name "$ref_name" --arg ref_name_lowercase "$ref_name_lowercase" \
-            '{repo_name: $repo_name, repo_name_lowercase: $repo_name_lowercase, \
-              repo_owner: $repo_owner, repo_owner_lowercase: $repo_owner_lowercase, \
-              ref_name: $ref_name, ref_name_lowercase: $ref_name_lowercase}')
+          details=$(jq --arg repo_name "$repo_name" \
+            --arg repo_name_lowercase "$repo_name_lowercase" \
+            --arg repo_owner "$repo_owner" \
+            --arg repo_owner_lowercase "$repo_owner_lowercase" \
+            '{ 
+                "repo_name": $repo_name, 
+                "repo_name_lowercase": $repo_name_lowercase, 
+                "repo_owner": $repo_owner, 
+                "repo_owner_lowercase": $repo_owner_lowercase 
+            }'
+          )
 
           echo "details=$details" >> $GITHUB_OUTPUT
