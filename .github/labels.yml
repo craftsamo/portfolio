@@ -64,6 +64,6 @@
 - name: "🔄workflow: get-details"
   description: "Retrieve detailed information"
   color: "5319E7"
-- name: "🔄workflow: view-details"
+- name: "🔄workflow: display-details"
   description: "Display detailed information"
   color: "5319E7"
