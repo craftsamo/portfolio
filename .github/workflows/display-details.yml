@@ -6,6 +6,7 @@ on:
       guthub_event_name:
         type: choice
         options:
+          - "workflow_dispatch"
           - pull_request
           - push
           - issue_comment
@@ -16,6 +17,8 @@ jobs:
   execute-get-details:
     name: Execute get details workflow
     uses: ./.github/workflows/get-details.yml
+    with:
+      event_name: ${{ inputs.github_event_name }}
 
   view-details:
     name: Execute get details workflow
@@ -27,4 +30,5 @@ jobs:
         run: |
           echo "Project Name: ${{ needs.execute-get-details.outputs.project_name }}"
           echo "Apps Details: ${{ needs.execute-get-details.outputs.apps }}"
+          echo "App Details by name: ${{ needs.execute-get-details.outputs.apps_by_name }}"
           echo "Repository Information: ${{ needs.execute-get-details.outputs.repository }}"

@@ -11,6 +11,8 @@ on:
         value: ${{ jobs.get-project.outputs.name }}
       apps:
         value: ${{ jobs.get-apps.outputs.details }}
+      apps_by_name:
+        value: ${{ jobs.get-apps.outputs.details_by_name }}
       repository:
         value: ${{ jobs.get-repository-details.outputs.details }}
 
@@ -40,6 +42,7 @@ jobs:
     timeout-minutes: 1
     outputs:
       details: ${{ steps.name-and-version.outputs.details }}
+      details_by_name: ${{ steps.name-and-version.outputs.details_by_name }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -56,6 +59,11 @@ jobs:
             done | jq -s .)
           echo "details=$(echo "$app_details" | jq -c .)" >> $GITHUB_OUTPUT
           echo $app_details
+
+          # Create a lookup object with app name as key
+          app_details_by_name=$(echo "$app_details" | jq 'reduce .[] as $item ({}; .[$item.name] = $item)')
+          echo "details_by_name=$(echo "$app_details_by_name" | jq -c .)" >> $GITHUB_OUTPUT
+          echo "Apps by name: $app_details_by_name"
 
   #############################################################################
   #  Get repository details                                                   #
