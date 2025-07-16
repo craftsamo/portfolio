@@ -4,6 +4,14 @@ Welcome to the Turborepo Starter repository! This project serves as a
 boilerplate to streamline the development of Turborepo applications with best
 practices and curated configurations.
 
+**Branches**:
+
+- **main**: A stable branch that maintains the production environment.
+
+- **with-cloudrun**: A branch tailored for deploying applications on Google
+  Cloud Run, featuring integrations and configurations specific to this
+  platform.
+
 ## Contents
 
 - [Installation](#installation)
