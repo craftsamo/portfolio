@@ -1,21 +1,51 @@
-# Sync labels
+# Sync Labels
 
-**Definition**: [labels.yml](../.github/labels.yml)
+A method to effectively synchronize [labels](../.github/labels.yml) used in Pull
+Requests and Issues is incorporated.
 
-This file contains the configuration for labels used in the project. Labels are
-categorized by type (e.g., feature, bug, enhancement), app, workspace, and
-GitHub actions. Each label includes metadata such as name, description, and
-color.
+## Contents
 
-**Workflow**: [sync-labels.yml](../.github/workflows/sync-labels.yml)
+- [Categories](#categories)
+- [Synchronizing Defined Labels](#synchronizing-defined-labels)
 
-This GitHub Actions workflow automates the synchronization of labels defined in
-`labels.yml` with the repository. It runs manually via `workflow_dispatch` and
-uses the `micnncim/action-label-syncer@v1` action to sync labels. The workflow
-prunes unused labels and ensures the repository remains consistent with the
-configuration.
+## Categories
 
-**Note**: This workflow performs a complete overwrite of existing labels in the
-repository based on the `labels.yml` configuration file. Ensure that any manual
-label edits in the repository are backed up or incorporated into `labels.yml` to
-avoid loss of data.
+[labels](../.github/labels.yml) are divided into the following groups:
+
+| Category         | Label Names                           | Usage Location                |
+| ---------------- | ------------------------------------- | ----------------------------- |
+| Action           | e.g., 🌱feature, ⚒️enhancement        | Pull Request, Issues, Release |
+| Target           | 🌐app:\*, 📦package:\*, 🔄workflow:\* | Pull Request, Issues          |
+| Version Resolver | 🌟major                               | Pull Request                  |
+
+By appropriately assigning labels to each category, the following benefits can
+be achieved:
+
+1. **Clear Classification**: Pull requests and issues are clearly categorized,
+   making project management easier.
+2. **Quick Response**: Labels enable swift identification of relevant issues and
+   pull requests.
+3. **Enhanced Consistency**: Unified rules for label usage across the team
+   facilitate consistent operations.
+4. **Analysis and Reporting**: Leveraging labels for filtering and analyzing
+   data simplifies tracking project progress.
+
+This allows the project to be managed more efficiently and systematically.
+
+> [!WARNING]
+>
+> Note that deleting labels defined as
+> [Version Resolver](/docs/releases.md#version-resolver) may cause automatic
+> releases to malfunction.
+
+## Synchronizing Defined Labels
+
+To synchronize the predefined labels, execute
+[sync-labels.yml](../.github/workflows/sync-labels.yml) on
+[Github](https://github.com/) or run `gh workflows run "Sync Labels"`.
+
+> [!WARNING]
+>
+> Note that existing labels will be completely overwritten.
+>
+> To disable this setting, change `prune: false`.

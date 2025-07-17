@@ -1,93 +1,67 @@
 # Releases
 
-## Release Drafter Workflow
+The workflow for automatically drafting and updating release notes is
+integrated.
 
-The new release drafter workflow automates the creation of draft releases for
-the `main` branch. Key features include:
+> [!NOTE]
+>
+> This feature is triggered by merging into the `main` branch.
 
-### Workflow Details
+## Contents
 
-- **Triggers**:
-  - Push events to the `main` branch.
-  - Pull request events (opened, reopened, synchronize).
-- **Setup**:
-  - Uses the
-    [release-drafter/release-drafter@v6](https://github.com/release-drafter/release-drafter)
-    action.
-  - Configured with `GITHUB_TOKEN` for authentication.
+- [Template](#template)
+- [Categories](#categories)
+- [Version Resolver](#version-resolver)
+- [Automatically Label Pull Requests](#automatically-label-pull-requests)
 
-### Release Notes Format
+## Template
 
-- **Change Template**:
-  - `- $TITLE @$AUTHOR (#$NUMBER)`
-- **Version Naming**:
-  - Name template: `v$RESOLVED_VERSION 🚀`
-  - Tag template: `v$RESOLVED_VERSION`
+The release note template is specified in the following items of
+[release-drafter.yml](../.github/release-drafter.yml).
 
-### Version Resolver
+- **Title**: The title of the release is specified by `name-template`.
+- **Tag**: The version tag of the release is specified by `tag-template`.
+- **Change Template**: The format of the changes is specified by
+  `change-template`.
+- **Body Template**: The body template of the release is specified by
+  `template`.
 
-- Labels that trigger version bumps:
-  - **Major**: 🌟major
-  - **Minor**: 🌱feature, 🐞hotfix
-  - **Patch**: 📝documentation, ⚒️enhancement, 🐛bug
-  - **Default**: patch
+## Categories
 
-### Categories
+You can specify the categories to be automatically included in the release
+contents with `categories`.
 
-- 🚀 New Features: 🌱feature
-- ⚒️ Enhancements: ⚒️enhancement
-- 🐛 Bug Fixes: 🐛bug, 🐞hotfix
-- 📄 Documentation: 📝documentation
+`labels` must be predefined in [labels](../.github/labels.yml) and synchronized
+with the repository.
 
-### Autolabeler
+## Version Resolver
 
-Labels are automatically applied based on branch naming patterns:
+**Versioning Configuration**: `{major}.{minor}.{patch}`
 
-- 📝documentation:
-  - Branch patterns: `/doc/, /document/, /documentation/`
-  - File patterns: `*.md`
-- ⚒️enhancement:
-  - Branch patterns: `/improve/, /refactor/, /enhancement/`
+The version of the next release will increment the corresponding part based on
+the label attached to the first pull request merged after the previous release
+was published.
 
-### Label Details
+| Label           | Type  |
+| --------------- | ----- |
+| 🌟major         | major |
+| 🌱feature       | minor |
+| 🐞hotfix        | minor |
+| 📝documentation | patch |
+| ⚒️enhancement   | patch |
+| 🐛bug           | patch |
 
-These [labels](../.github/labels.yml) are used across workflows for
-categorization and version resolution:
+## Automatically Label Pull Requests
 
-- **🌟major**: Indicates a major release update.
-- **🌱feature**: Feature addition.
-- **🐛bug**: Bug fixes.
-- **🐞hotfix**: High urgency bug fixes.
-- **📝documentation**: Documentation improvement or addition.
-- **⚒️enhancement**: Feature improvement.
+If a label is not attached to a Pull Request, it will not function correctly. To
+reduce the possibility of such occurrences,
+[assign-labels.yml](../.github/workflows/assign-labels.yml) has been prepared.
 
----
+[assign-labels.yml](../.github/workflows/assign-labels.yml) automatically
+assigns the appropriate Action label based on the
+[branch](/docs/branch-strategy.md#valid-type) name when a Pull Request is
+created.
 
-### Summarized Changes
-
-#### Categories from release-drafter.yml
-
-- **🚀 New Features**: Includes `🌱feature` label.
-- **⚒️ Enhancements**: Includes `⚒️enhancement` label.
-- **🐛 Bug Fixes**: Includes `🐛bug` and `🐞hotfix` labels.
-- **📄 Documentation**: Includes `📝documentation` label.
-
-#### Autolabeler Behavior
-
-- Automatically applies labels based on:
-  - **Branch Patterns**:
-    - `/doc/, /document/, /documentation/` → `📝documentation`
-    - `/improve/, /refactor/, /enhancement/` → `⚒️enhancement`
-  - **File Patterns**:
-    - `*.md` → `📝documentation`
-
-#### Version Resolver
-
-- **Major bump** triggered by `🌟major` label.
-- **Minor bump** triggered by `🌱feature`, `🐞hotfix` labels.
-- **Patch bump** triggered by `📝documentation`, `⚒️enhancement`, `🐛bug`
-  labels.
-- Default bump is set to **patch**.
-
-This workflow enhances release automation and improves clarity in versioning and
-labeling processes.
+You can also configure rules in the `autolabeler` of
+[release-drafter.yml](../.github/release-drafter.yml) to assign labels at the
+same timing as `assign-labels.yml`.

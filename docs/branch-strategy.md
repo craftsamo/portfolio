@@ -1,63 +1,142 @@
 # Branch strategy
 
-**type**: Github flow
+This branch strategy is inspired by
+[GithubFlow](https://docs.github.com/en/get-started/using-github/github-flow).
+
+**Apart from branch naming**, feel free to structure as you like without any
+issues.
 
 ![Branch Strategy](./images/branch-strategy.png)
 
-**Branches**:
+## Contents
 
-| Name      | Description                                               | Branch Source | Merge Target |
-| --------- | --------------------------------------------------------- | ------------- | ------------ |
-| main      | A stable branch that maintains the production environment | None          | None         |
-| develop   | A branch for integrating code under development           | main          | main         |
-| <type>/\* | A branch used for developing new <type>                   | develop       | develop      |
-| hotfix/\* | A branch used for urgent bug fixes                        | main          | main         |
+- [Branches](#Branches)
+- [Naming](#naming)
+- [Merge Target](#merge-target)
+- [Merge Method](#merge-method)
+- [Rebase Guide](#things-to-do-before-issuing-a-pull-request)
 
-**The following values can be used for <type>**:
+## Branches
 
-- feat
-- enhance
-- fix
-- docs
+The basic types and roles of branches are as follows.
 
-## Workflow
+| Name      | Description                                     | Source               |
+| --------- | ----------------------------------------------- | -------------------- |
+| main      | Always deployable and stable branch             | None                 |
+| develop   | A branch for integrating code under development | main                 |
+| `type`/\* | Basic working branch                            | develop or `type`/\* |
 
-**Create a new feature**:
+It is recommended to divide large working branches into smaller working branches
+for each task.
 
-1. Create feat/\* from the develop branch.
-2. Make the necessary code changes and add commits.
-3. Collaborate with other developers and request a code review as needed.
-4. Once the code review is complete, merge into the develop branch.
-5. After development is finished, delete the branch.
+## Naming
 
-**Fix a bug**:
+Branch naming should follow `<type>/*` to ensure that various workflows function
+effectively.
 
-1. Create hotfix/\* from the main branch.
-2. Make the necessary code changes to fix the bug.
-3. Test the fixed code and verify its functionality.
-4. Collaborate with other developers and request a code review as needed.
-5. After the code review is complete, merge into the main branch.
-6. After the fix is complete, delete the branch.
+It is recommended to separate the parts after `*` with `-`.
 
-## Things to do before issuing a Pull Request
+### Example
 
-![Rebase Guide](./images/rebase-guide.png)
+**GOOD**: `feat/good-case`
 
-Regularly executing `git rebase {base_branch}` provides the following benefits:
+**BAD**: `feat/bad/case`
 
-1. The history becomes linear, making development management concise and clear.
-2. Ensures rapid consistency between `main` and `develop`.
-3. Minimizes conflicts and collisions among developers' work.
-4. Reflects hotfix content in develop, preventing future conflicts or
-   inconsistencies.
+### Valid type
 
-## Merge Methods
+Branches named with the following `type` will automatically be assigned related
+labels upon issuing a PullRequest.
 
-1. **develop -> main**: Use Merge to organize commit history while merging the
-   develop branch into the main branch.
-2. **hotfix -> main**: Use SquashMerge to retain commit history while
-   integrating the hotfix branch into the main branch.
-3. **feat -> develop**: Use SquashMerge to integrate the feat branch into the
-   develop branch.
-4. **feat -> feat**: Use RebaseMerge or SquashMerge to linearize the history
-   while integrating feat branches with each other.
+- `feat`: 🌱feature
+- `enhance` or `enhancement`: ⚒️enhancement
+- `improve`: ⚒️enhancement
+- `refactor`: ⚒️enhancement
+- `fix`: 🐛bug
+- `hotfix`: 🐞hotfix
+- `docs`: 📝documentation
+
+These behaviors can be modified in
+[assign-labels.yml](../.github/workflows/assign-labels.yml) and
+[release-drafter.yml](../.github/release-drafter.yml).
+
+## Merge Target
+
+Pay attention to the target branch for merging to prevent trouble, accidents,
+and confusion.
+
+| Name      | Merge Target         |
+| --------- | -------------------- |
+| main      | None                 |
+| develop   | main                 |
+| `type`/\* | develop or `type`/\* |
+| hotfix/\* | main                 |
+
+> [!WARNING]
+>
+> If the `hotfix` branch is merged directly into `main`, it is recommended to
+> synchronize by executing `git rebase main` on the `develop` branch.
+
+## Merge Method
+
+The merge methods for each scenario are as follows.
+
+| Name      | Target    | Method       |
+| --------- | --------- | ------------ |
+| develop   | main      | Base Merge   |
+| `type`/\* | develop   | Squash Merge |
+| `type`/\* | `type`/\* | Squash Merge |
+| hotfix/\* | main      | Base Merge   |
+
+## Rebase Guide
+
+![Rebase Flow](./images/rebase-flow.png)
+
+To maintain a clean commit history and avoid unnecessary merge commits, follow
+the steps below based on your branching context.
+
+### Working branch (`type`/\*) -> Working branch (`type`/\*)
+
+1. Execute `git rebase <base_branch>`.
+2. Create a Pull Request.
+3. **Squash Merge** into `<base_branch>`.
+4. Delete the branch.
+
+### Working branch (`type`/\*) -> develop
+
+1. Execute `git rebase develop`.
+2. Create a Pull Request.
+3. **Squash Merge** into develop.
+4. Delete the branch.
+
+### Develop to Main
+
+1. Execute `git rebase main`.
+2. Create a Pull Request.
+3. **Base Merge** into main.
+
+### Hotfix Branch (`hotfix/*`)
+
+1. Execute `git rebase main`.
+2. Create a Pull Request.
+3. **Squash Merge** into `main`.
+4. Delete the branch.
+
+> [!WARNING]
+>
+> After a hotfix is merged into `main`, `develop` must be rebased onto `main` to
+> sync the changes:
+>
+> ```bash
+> git checkout develop
+> git rebase main
+> ```
+
+### Important Notes
+
+- Only maintainers/admins should rebase `develop` onto `main` after hotfix
+  merges.
+- Rebasing should be avoided on shared branches unless all collaborators are
+  aware.
+
+This process ensures that the `main` branch remains stable, the `develop` branch
+stays up-to-date, and each feature/hotfix has a clear, linear history.

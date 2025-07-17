@@ -1,111 +1,96 @@
-# Turborepo Starter
+<div align="center">
+  <h1>Welcome to the Turborepo Starter!</h1>
+</div>
 
-Welcome to the Turborepo Starter repository! This project serves as a
-boilerplate to streamline the development of Turborepo applications with best
-practices and curated configurations.
-
-**Branches**:
-
-- **main**: A stable branch that maintains the production environment.
-
-- **with-cloudrun**: A branch tailored for deploying applications on Google
-  Cloud Run, featuring integrations and configurations specific to this
-  platform.
+This project serves as a boilerplate for efficiently developing applications
+using Turborepo, equipped with various best practices and carefully selected
+configurations.
 
 ## Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
+- [Branches](#branches)
+- [Getting Started](#installation)
 - [Internal Packages](#internal-packages)
+- [Commit Rules](#commit-rules)
 - [Branch Strategy](#branch-strategy)
 - [Sync Label](#sync-labels)
 - [Releases](#releases)
-- [Commit Rules](#commit-rules)
 
-## Installation
+## Branches:
 
-To set up the repository, run:
+- **main**: A stable branch equipped with minimal features.
+
+- **with-cloudrun**: A branch integrated with features to deploy applications on
+  [Google Cloud](https://cloud.google.com).
+
+## Getting Started
+
+1. **Clone the repository**
+
+```sh
+git clone https://github.com/itou-rui/turborepo-starter.git
+
+```
+
+To clone a specific branch, use:
+
+```sh
+git clone -b with-cloudrun https://github.com/itou-rui/turborepo-starter.git
+```
+
+2. **Install Dependencies**
 
 ```sh
 yarn install
 ```
 
-## Usage
-
-### Linting
-
-Run the ESLint checks:
+3. **Run Project**
 
 ```sh
-yarn lint
+nps dev
 ```
 
-### Testing
-
-Run tests with Jest:
-
-```sh
-yarn test
-```
-
-### Commit Messages
-
-Use the interactive commit message tool:
-
-```sh
-yarn commit
-```
-
-This README consolidates all relevant information for contributors and
-developers working on this repository.
+For other available commands, please refer to [here](package-scripts.js).
 
 ## Internal Packages
 
 This repository contains several internal packages tailored for specific
 purposes:
 
-### TypeScript Configurations
+| Package name                            | Description                                            |
+| --------------------------------------- | ------------------------------------------------------ |
+| [tsconfig](packages/tsconfig/README.md) | Shared TypeScript configurations.                      |
+| [eslint](packages/eslint/README.md)     | Linting configurations for various frameworks.         |
+| [prettier](packages/prettier/README.md) | Formatting rules for consistent code style.            |
+| [jest](packages/jest/README.md)         | Testing configurations for unit and integration tests. |
+| [ui](packages/ui/README.md)             | Common UI package.                                     |
 
-- **Description**: Shared TypeScript configurations.
-- **Details**: Refer to [tsconfig README](packages/tsconfig/README.md).
-
-### ESLint Configurations
-
-- **Description**: Linting configurations for various frameworks.
-- **Details**: Refer to [eslint README](packages/eslint/README.md).
-
-### Prettier Configurations
-
-- **Description**: Formatting rules for consistent code style.
-- **Details**: Refer to [prettier README](packages/prettier/README.md).
-
-### Jest Configurations
-
-- **Description**: Testing configurations for unit and integration tests.
-- **Details**: Refer to [jest README](packages/jest/README.md).
-
-### UI Configurations
-
-- **Description**: Common UI package.
-- **Details**: Refer to [ui README](packages/ui/README.md).
-
-## Branch Strategy
-
-Refer to the [branch strategy](docs/branch-strategy.md) for detailed workflows,
-branch descriptions, and merge methods.
-
-## Sync Labels
-
-Automates the synchronization of labels with the repository. Refer to
-[sync labels documentation](docs/sync-labels.md) for configuration and
-workflows.
-
-## Releases
-
-This project includes a workflow that automatically generates release notes. For
-more details, refer to [releases](/docs/releases.md).
+These packages can be added as dependencies in `apps/**` and `packages/**` to
+utilize them.
 
 ## Commit Rules
 
-We follow strict commit message guidelines to ensure clarity and traceability.
-For detailed rules and examples, see [commit guidelines](docs/commit.md).
+Settings to ensure clarity and traceability of commit messages have already been
+incorporated. For detailed rules, please check [here](docs/commit-rules.md).
+
+## Branch Strategy
+
+By operating branches based on the rules outlined
+[here](/docs/branch-strategy.md), you can enjoy the following benefits:
+
+- Labels are automatically added to Pull Requests.
+- Contents are automatically appended to release notes.
+
+## Sync Labels
+
+A workflow has been prepared to automatically synchronize the contents defined
+in [.github/labels.yml](/.github/labels.yml).
+
+For more details, please refer to [here](/docs/sync-labels.md).
+
+## Releases
+
+When merged into the `main` branch, a convenient workflow automatically creates
+(updates) release notes in Draft state.
+
+For details, please check [here](/docs/releases.md).
