@@ -64,6 +64,7 @@ purposes:
 | [prettier](packages/prettier/README.md) | Formatting rules for consistent code style.            |
 | [jest](packages/jest/README.md)         | Testing configurations for unit and integration tests. |
 | [ui](packages/ui/README.md)             | Common UI package.                                     |
+| [types](packages/types/README.md)       | Common types package.                                  |
 
 These packages can be added as dependencies in `apps/**` and `packages/**` to
 utilize them.
