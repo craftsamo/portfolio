@@ -53,6 +53,9 @@
 - name: "📦package: types"
   description: "Shared TypeScript types for the project"
   color: "F9D0C4"
+- name: "📦package: constants"
+  description: "Shared constants package"
+  color: "F9D0C4"
 
 ## Github actions
 - name: "🔄workflow: sync-labels"

@@ -57,14 +57,15 @@ For other available commands, please refer to [here](package-scripts.js).
 This repository contains several internal packages tailored for specific
 purposes:
 
-| Package name                            | Description                                            |
-| --------------------------------------- | ------------------------------------------------------ |
-| [tsconfig](packages/tsconfig/README.md) | Shared TypeScript configurations.                      |
-| [eslint](packages/eslint/README.md)     | Linting configurations for various frameworks.         |
-| [prettier](packages/prettier/README.md) | Formatting rules for consistent code style.            |
-| [jest](packages/jest/README.md)         | Testing configurations for unit and integration tests. |
-| [ui](packages/ui/README.md)             | Common UI package.                                     |
-| [types](packages/types/README.md)       | Common types package.                                  |
+| Package name                              | Description                                            |
+| ----------------------------------------- | ------------------------------------------------------ |
+| [tsconfig](packages/tsconfig/README.md)   | Shared TypeScript configurations.                      |
+| [eslint](packages/eslint/README.md)       | Linting configurations for various frameworks.         |
+| [prettier](packages/prettier/README.md)   | Formatting rules for consistent code style.            |
+| [jest](packages/jest/README.md)           | Testing configurations for unit and integration tests. |
+| [ui](packages/ui/README.md)               | Common UI package.                                     |
+| [types](packages/types/README.md)         | Common types package.                                  |
+| [constants](packages/constants/README.md) | Common constants package.                              |
 
 These packages can be added as dependencies in `apps/**` and `packages/**` to
 utilize them.
