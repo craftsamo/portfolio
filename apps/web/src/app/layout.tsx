@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from 'next/font/google';
-import type { LayoutProps } from '@workspace/types';
+import type { LayoutProps } from '@workspace/types/web';
 import { Toaster } from '@workspace/ui/components/sonner';
 import '@workspace/ui/globals.css';
 import { ThemeProvider } from '@/components/Providers';

@@ -1,11 +1,14 @@
 {
   "name": "@workspace/types",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
-  "main": "./src/index.ts",
   "devDependencies": {
     "@workspace/eslint": "*",
     "@workspace/prettier": "*",
     "@workspace/tsconfig": "*"
+  },
+  "exports": {
+    "./web": "./src/web/index.ts"
   }
 }
