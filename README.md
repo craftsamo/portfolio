@@ -23,6 +23,9 @@ configurations.
 - **with-cloudrun**: A branch integrated with features to deploy applications on
   [Google Cloud](https://cloud.google.com).
 
+- **with-cloudrun-proxy**: A branch equipped with a foundation for a full-stack
+  application where `apps/web` and `apps/api` are reverse-proxied.
+
 ## Getting Started
 
 1. **Clone the repository**
