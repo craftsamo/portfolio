@@ -21,7 +21,7 @@ export const CustomButton = () => {
 You can add new components to this package by running the following command:
 
 ```bash
-yarn shadcn add {component}
+cd packages/ui && yarn shadcn add {component}
 ```
 
 You can check the components available for addition [here](https://ui.shadcn.com/docs/components).
