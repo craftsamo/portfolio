@@ -52,3 +52,29 @@ export const Counter = () => {
   );
 };
 ```
+
+## Middleware
+
+The `chain` function, which fixes the execution order of middleware, is provided.
+
+By using this mechanism, it is possible to divide the processing of middleware
+that should be exported as a single file.
+
+**Example**:
+
+```ts
+export default chain([
+  // 1
+  ratelimit,
+
+  // 2
+  (middleware: NextMiddleware) => {
+    return async (request: NextRequest, event: NextFetchEvent) => {
+      // ...processing
+      return await middleware(request, event);
+    };
+  },
+
+  // ...Add middleware here (executed in order from top to bottom)
+]);
+```
