@@ -4,7 +4,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import '@testing-library/jest-dom';
 import { render, act } from '@testing-library/react';
-import { ThemeProvider } from '../components/Providers';
+import { ThemeProvider, ReduxToolProvider } from '../components/Providers';
 
 // Setup for React 18's concurrent features
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -34,9 +34,11 @@ window.matchMedia =
  */
 const customRender = (ui, options = {}) => {
   const Wrapper = ({ children }) => (
-    <ThemeProvider defaultTheme='light' enableSystem={false}>
-      {children}
-    </ThemeProvider>
+    <ReduxToolProvider>
+      <ThemeProvider defaultTheme='light' enableSystem={false}>
+        {children}
+      </ThemeProvider>
+    </ReduxToolProvider>
   );
 
   return {
