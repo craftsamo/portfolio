@@ -62,6 +62,7 @@ WORKDIR /app
 COPY --from=installer /app/node_modules ./node_modules
 COPY --from=sourcer /app/apps/web/.next ./apps/web/.next
 COPY --from=sourcer /app/apps/web/package.json ./apps/web/package.json
+COPY --from=sourcer /app/apps/web/public ./apps/web/public
 
 # Set working directory to the web application directory
 WORKDIR /app/apps/web/
