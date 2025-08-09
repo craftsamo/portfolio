@@ -27,6 +27,7 @@ module.exports = {
   scopes: [
     { name: "web" },
     { name: "api" },
+    { name: "dashboard" },
     { name: "workflows" },
     { name: "packages" },
     { name: "scripts" },
