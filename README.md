@@ -16,7 +16,7 @@ configurations.
 - [Sync Label](#sync-labels)
 - [Releases](#releases)
 
-## Branches:
+## Branches
 
 - **main**: A stable branch equipped with minimal features.
 
@@ -25,6 +25,9 @@ configurations.
 
 - **with-cloudrun-proxy**: A branch equipped with a foundation for a full-stack
   application where `apps/web` and `apps/api` are reverse-proxied.
+
+- **with-cloudrun-proxy-and-discordbot**: DiscordAuth and DiscordBot are
+  integrated into `apps/api` built on `with-cloudrun-proxy`.
 
 ## Getting Started
 
