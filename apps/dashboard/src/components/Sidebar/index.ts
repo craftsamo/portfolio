@@ -1,2 +1,3 @@
 export * from './NavGroup';
+export * from './NavItems';
 export * from './Switcher';
