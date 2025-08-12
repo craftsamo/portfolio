@@ -13,6 +13,7 @@ export default async function Dashboard() {
       <Rows className='grid-cols-1 md:grid-cols-1'>
         <BrowserViewChart />
       </Rows>
+      <Rows className='min-h-[100vh] flex-1 rounded-xl bg-muted/50 grid-cols-1 md:min-h-min'>
         <div />
       </Rows>
     </Box>
