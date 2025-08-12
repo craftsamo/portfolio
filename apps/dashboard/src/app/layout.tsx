@@ -16,6 +16,7 @@ import {
 } from '@workspace/ui/components/sidebar';
 import { DropdownMenuSeparator } from '@workspace/ui/components/dropdown-menu';
 import { Separator } from '@workspace/ui/components/separator';
+import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
 import '@workspace/ui/globals.css';
 import { ReduxToolProvider, ThemeProvider } from '@/components/Providers';
 import {
@@ -90,14 +91,17 @@ export default async function RootLayout(props: LayoutProps) {
 
               {/* Main Content Heeader */}
               <SidebarInset className='bg-transparent'>
-                <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
-                  <div className='flex items-center gap-2 px-4'>
+                <header className='flex h-16 shrink-0 items-center transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 justify-between px-4'>
+                  {/* Left: Sidebar Trigger, Separator, Breadcrumb */}
+                  <div className='flex items-center gap-2'>
                     <SidebarTrigger className='-ml-1' />
                     <Separator orientation='vertical' className='mr-2 h-4' />
                     <Suspense fallback={<BreadcrumbSkeleton />}>
                       <Breadcrumb />
                     </Suspense>
                   </div>
+                  {/* Right: ThemeToggle only */}
+                  <ThemeToggle size='sm' variant='dropdown' showLabel />
                 </header>
 
                 {/* Main Content Body */}
