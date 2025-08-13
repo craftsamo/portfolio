@@ -36,6 +36,9 @@
 - name: "🌐app: dashboard"
   description: "dashboard application"
   color: "C5DEF5"
+- name: "🌐app: games"
+  description: "games application"
+  color: "C5DEF5"
 
 ## Workspaces
 - name: "📦package: jest"
