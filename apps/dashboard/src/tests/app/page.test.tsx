@@ -1,11 +1,11 @@
 import { render, screen, act } from '../jest.setup';
 import '@testing-library/jest-dom';
-import LandingPage from '../../app/page';
+import Dashboard from '../../app/page';
 
-describe('LandingPage', () => {
-  it('renders the LandingPage correctly', async function () {
+describe('Dashboard', () => {
+  it('renders the Dashboard correctly', async function () {
     await act(async () => {
-      render(await LandingPage());
+      render(await Dashboard());
     });
   });
 });
