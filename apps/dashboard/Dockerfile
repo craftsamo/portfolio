@@ -16,7 +16,7 @@ RUN yarn global add turbo
 COPY . .
 
 # Prune unnecessary files and isolate the web subworkspace
-RUN turbo prune --scope=web --docker
+RUN turbo prune --scope=dashboard --docker
 
 ###############################################################################
 # Installer stage: Add lockfile and package.json's of isolated subworkspace   #
@@ -48,7 +48,7 @@ COPY --from=installer /app/ .
 COPY --from=builder /app/out/full/ .
 
 # Build the application using turbo
-RUN yarn turbo run build --filter=web...
+RUN yarn turbo run build --filter=dashboard...
 
 ###############################################################################
 # Runner stage: Prepare lightweight runtime for the application               #
@@ -60,12 +60,12 @@ WORKDIR /app
 
 # Copy runtime dependencies and built application files from previous stages
 COPY --from=installer /app/node_modules ./node_modules
-COPY --from=sourcer /app/apps/web/.next ./apps/web/.next
-COPY --from=sourcer /app/apps/web/package.json ./apps/web/package.json
-COPY --from=sourcer /app/apps/web/public ./apps/web/public
+COPY --from=sourcer /app/apps/dashboard/.next ./apps/dashboard/.next
+COPY --from=sourcer /app/apps/dashboard/package.json ./apps/dashboard/package.json
+COPY --from=sourcer /app/apps/dashboard/public ./apps/dashboard/public
 
 # Set working directory to the web application directory
-WORKDIR /app/apps/web/
+WORKDIR /app/apps/dashboard/
 
 # Define environment variables for the application
 ENV PORT=8080
