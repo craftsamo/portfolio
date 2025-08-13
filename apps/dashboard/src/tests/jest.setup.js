@@ -26,6 +26,17 @@ window.matchMedia =
     };
   };
 
+// Mock ResizeObserver for recharts/ResponsiveContainer
+if (typeof window.ResizeObserver === 'undefined') {
+  class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  window.ResizeObserver = ResizeObserver;
+  global.ResizeObserver = ResizeObserver;
+}
+
 /**
  * Custom render function with providers
  * @param {import('react').ReactElement} ui - The React component to render
