@@ -93,7 +93,7 @@ jobs:
             if [ "${{ inputs.environment }}" == "production" ]; then
               export BASE_URL="https://portfolio.${{ vars.DOMAIN }}"
             else
-              export BASE_URL="https://dev.portfolio.${{ vars.DOMAIN }}"
+              export BASE_URL="https://portfolio-develop.${{ vars.DOMAIN }}"
             fi
             # export UPSTASH_REDIS_REST_URL="${{ secrets.UPSTASH_REDIS_REST_URL }}"
             # export UPSTASH_REDIS_REST_TOKEN="${{ secrets.UPSTASH_REDIS_REST_TOKEN }}"
@@ -101,9 +101,9 @@ jobs:
           ## Environment variables specific to `apps/dashboard`
           elif [ "${{ inputs.app_name }}" == "dashboard" ]; then
             if [ "${{ inputs.environment }}" == "production" ]; then
-              export BASE_URL="https://dashboard.portfolio.${{ vars.DOMAIN }}"
+              export BASE_URL="https://portfolio-dashboard.${{ vars.DOMAIN }}"
             else
-              export BASE_URL="https://dev.dashboard.portfolio.${{ vars.DOMAIN }}"
+              export BASE_URL="https://portfolio-dashboard-develop.${{ vars.DOMAIN }}"
             fi
           fi
 
