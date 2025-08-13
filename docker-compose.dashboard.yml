@@ -1,0 +1,25 @@
+services:
+  web:
+    container_name: portfolio-dashboard
+    image: dashboard:latest
+    build:
+      context: .
+      dockerfile: ./apps/dashboard/Dockerfile
+    env_file:
+      - ./apps/dashboard/.env
+    environment:
+      - PORT=3000
+      - HOSTNAME="0.0.0.0"
+      - NODE_ENV=production
+      - BASE_URL="http://localhost:3000"
+    stop_signal: SIGINT
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
