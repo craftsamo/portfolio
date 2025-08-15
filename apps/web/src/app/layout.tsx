@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import type { LayoutProps } from '@workspace/types/web';
 import { Toaster } from '@workspace/ui/components/sonner';
@@ -13,6 +14,11 @@ const fontMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
 });
+
+export const metadata: Metadata = {
+  title: 'Portfolio',
+  description: 'portfolio page',
+};
 
 /**
  * The root layout component for the application.
