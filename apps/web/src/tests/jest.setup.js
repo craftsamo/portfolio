@@ -26,6 +26,52 @@ window.matchMedia =
     };
   };
 
+// Mock ResizeObserver for recharts/ResponsiveContainer
+if (typeof window.ResizeObserver === 'undefined') {
+  class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  window.ResizeObserver = ResizeObserver;
+  global.ResizeObserver = ResizeObserver;
+}
+
+// Mock IntersectionObserver for framer-motion
+if (typeof window.IntersectionObserver === 'undefined') {
+  class IntersectionObserver {
+    constructor(callback, options) {
+      this.callback = callback;
+      this.options = options;
+    }
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  window.IntersectionObserver = IntersectionObserver;
+  global.IntersectionObserver = IntersectionObserver;
+}
+
+// Mock getBoundingClientRect to return non-zero size for recharts ResponsiveContainer
+if (!Element.prototype.getBoundingClientRect.__isMocked) {
+  const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
+  Element.prototype.getBoundingClientRect = function () {
+    return {
+      width: 400,
+      height: 400,
+      top: 0,
+      left: 0,
+      bottom: 400,
+      right: 400,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    };
+  };
+  Element.prototype.getBoundingClientRect.__isMocked = true;
+  Element.prototype._originalGetBoundingClientRect = originalGetBoundingClientRect;
+}
+
 /**
  * Custom render function with providers
  * @param {import('react').ReactElement} ui - The React component to render
