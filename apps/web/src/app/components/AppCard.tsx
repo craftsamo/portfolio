@@ -20,7 +20,7 @@ export interface AppCardProps {
 }
 
 export const AppCard = ({ title, description, className, buttonText, href, imageSrc, imageAlt }: AppCardProps) => (
-  <Card className={cn('pt-0', className)}>
+  <Card className={cn('pt-0 h-full', className)}>
     <CardHeader className='flex flex-col items-center h-full gap-4 space-y-0 border-b py-5'>
       <div className='w-full h-42 rounded-md overflow-hidden bg-muted flex-shrink-0'>
         {imageSrc ? (
