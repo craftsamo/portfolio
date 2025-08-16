@@ -105,7 +105,6 @@ jobs:
             else
               export BASE_URL="https://portfolio-dashboard-develop.${{ vars.DOMAIN }}"
             fi
-          fi
 
           ## Environment variables specific to `apps/game`
           elif [ "${{ inputs.app_name }}" == "games" ]; then
