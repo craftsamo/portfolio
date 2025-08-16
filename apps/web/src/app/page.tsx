@@ -11,7 +11,7 @@ export default async function Portfolio() {
       </Rows>
 
       {/* Demo list */}
-      <Rows className='grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      <Rows className='grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5'>
         <AppCard
           title='Dashboard'
           description='Data visualization and management dashboard. Demo of KPIs, charts, and an admin panel.'
