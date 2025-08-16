@@ -1,7 +1,7 @@
 import { Box, Rows } from '@/components/Layout';
-import { AppCard } from './components/AppCard';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
+import { ExampleSection } from './components/ExampleSection';
 
 export default async function Portfolio() {
   return (
@@ -17,19 +17,8 @@ export default async function Portfolio() {
       </Rows>
 
       {/* Demo list */}
-      <Rows id='examples' className='grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5'>
-        <AppCard
-          title='Dashboard'
-          description='Data visualization and management dashboard. Demo of KPIs, charts, and an admin panel.'
-          buttonText='Open Dashboard'
-          href='https://portfolio-dashboard.itourui.dev'
-        />
-        <AppCard
-          title='Games'
-          description='A collection of browser-playable mini games. Includes light games like Tetris.'
-          buttonText='Play Games'
-          href='https://portfolio-games.itourui.dev'
-        />
+      <Rows id='examples' className='sm:pt-12 grid-cols-1 gap-6 px-5'>
+        <ExampleSection />
       </Rows>
     </Box>
   );
