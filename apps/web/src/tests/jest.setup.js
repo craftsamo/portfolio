@@ -37,6 +37,21 @@ if (typeof window.ResizeObserver === 'undefined') {
   global.ResizeObserver = ResizeObserver;
 }
 
+// Mock IntersectionObserver for framer-motion
+if (typeof window.IntersectionObserver === 'undefined') {
+  class IntersectionObserver {
+    constructor(callback, options) {
+      this.callback = callback;
+      this.options = options;
+    }
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  window.IntersectionObserver = IntersectionObserver;
+  global.IntersectionObserver = IntersectionObserver;
+}
+
 // Mock getBoundingClientRect to return non-zero size for recharts ResponsiveContainer
 if (!Element.prototype.getBoundingClientRect.__isMocked) {
   const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
