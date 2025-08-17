@@ -1,55 +1,30 @@
 <div align="center">
-  <h1>Welcome to the Turborepo Starter!</h1>
+  <h1>Welcome to the Portfolio!</h1>
 </div>
-
-This project serves as a boilerplate for efficiently developing applications
-using Turborepo, equipped with various best practices and carefully selected
-configurations.
 
 ## Contents
 
 - [Branches](#branches)
 - [Getting Started](#installation)
 - [Internal Packages](#internal-packages)
-- [Commit Rules](#commit-rules)
-- [Branch Strategy](#branch-strategy)
-- [Sync Label](#sync-labels)
-- [Releases](#releases)
 
 ## Branches
 
 - **main**: A stable branch equipped with minimal features.
 
-- **with-cloudrun**: A branch integrated with features to deploy applications on
-  [Google Cloud](https://cloud.google.com).
-
-- **with-cloudrun-proxy**: A branch equipped with a foundation for a full-stack
-  application where `apps/web` and `apps/api` are reverse-proxied.
-
-- **with-cloudrun-proxy-and-discordbot**: DiscordAuth and DiscordBot are
-  integrated into `apps/api` built on `with-cloudrun-proxy`.
-
 ## Getting Started
 
-1. **Clone the repository**
+1. **Install Dependencies**
 
 ```sh
-git clone https://github.com/itou-rui/turborepo-starter.git
+yarn add -g nps
 ```
-
-To clone a specific branch, use:
 
 ```sh
-git clone -b with-cloudrun https://github.com/itou-rui/turborepo-starter.git
+nps prepare
 ```
 
-2. **Install Dependencies**
-
-```sh
-yarn install
-```
-
-3. **Run Project**
+2. **Run Project**
 
 ```sh
 nps dev
@@ -75,30 +50,3 @@ purposes:
 
 These packages can be added as dependencies in `apps/**` and `packages/**` to
 utilize them.
-
-## Commit Rules
-
-Settings to ensure clarity and traceability of commit messages have already been
-incorporated. For detailed rules, please check [here](docs/commit-rules.md).
-
-## Branch Strategy
-
-By operating branches based on the rules outlined
-[here](/docs/branch-strategy.md), you can enjoy the following benefits:
-
-- Labels are automatically added to Pull Requests.
-- Contents are automatically appended to release notes.
-
-## Sync Labels
-
-A workflow has been prepared to automatically synchronize the contents defined
-in [.github/labels.yml](/.github/labels.yml).
-
-For more details, please refer to [here](/docs/sync-labels.md).
-
-## Releases
-
-When merged into the `main` branch, a convenient workflow automatically creates
-(updates) release notes in Draft state.
-
-For details, please check [here](/docs/releases.md).
