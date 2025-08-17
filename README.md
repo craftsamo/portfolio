@@ -1,10 +1,6 @@
 <div align="center">
-  <h1>Welcome to the Turborepo Starter!</h1>
+  <h1>Welcome to the Portfolio!</h1>
 </div>
-
-This project serves as a boilerplate for efficiently developing applications
-using Turborepo, equipped with various best practices and carefully selected
-configurations.
 
 ## Contents
 
@@ -18,25 +14,17 @@ configurations.
 
 ## Getting Started
 
-1. **Clone the repository**
+1. **Install Dependencies**
 
 ```sh
-git clone https://github.com/itou-rui/turborepo-starter.git
+yarn add -g nps
 ```
-
-To clone a specific branch, use:
 
 ```sh
-git clone -b with-cloudrun https://github.com/itou-rui/turborepo-starter.git
+nps prepare
 ```
 
-2. **Install Dependencies**
-
-```sh
-yarn install
-```
-
-3. **Run Project**
+2. **Run Project**
 
 ```sh
 nps dev
