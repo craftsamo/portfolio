@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store';
 import { setLoading } from '@/store/slices/tetris';
-import { LoadingScreen } from './components/Layout';
+import { LoadingScreen } from './components/LoadingScreen';
 
 /**
  * Responsive layout:
