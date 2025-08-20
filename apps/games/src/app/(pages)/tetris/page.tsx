@@ -1,15 +1,30 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '@/store';
+import { setLoading } from '@/store/slices/tetris';
+import { LoadingScreen } from './components/Layout';
 
-export default async function TetrisApp() {
-  return <></>;
 /**
  * Responsive layout:
  * - Desktop (md and up): 2 : 6 : 2 using a 10-column grid
  * - Mobile (below md): 0 : 10 : 0 (sidebars hidden, main takes full width)
  */
 export default function TetrisApp() {
-  return (
+  const tetrisState = useAppSelector((state) => state.tetris);
+  const dispatch = useAppDispatch();
+
+  // Simulate loading state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setLoading(tetrisState.status === 'init'));
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [tetrisState.status, dispatch]);
+
+  return tetrisState.loading ? (
+    <LoadingScreen />
+  ) : (
     <div className='w-full'>
       <div className='grid grid-cols-10 gap-2 items-start'>
         {/* Left sidebar: hidden on small screens, spans 2 cols on md+ */}
