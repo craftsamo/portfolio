@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import counterReducer from './slices/counter';
+import tetrisReducer from './slices/tetris';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    tetris: tetrisReducer,
   },
 });
 
