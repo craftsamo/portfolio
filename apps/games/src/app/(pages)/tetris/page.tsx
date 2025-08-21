@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from '@/store';
 import { setLoading, setStatus } from '@/store/slices/tetris';
 import { LoadingScreen } from './components/LoadingScreen';
 import { GameBoard } from './components/GameBoard';
+import { NextPiecePreview } from './components/NextPiecePreview';
 import { HoldPiecePreview } from './components/HoldPiecePreview';
 import { GameStats } from './components/GameStats';
 import { useGameEngine } from './hooks/useGameEngine';
@@ -42,6 +43,7 @@ export default function TetrisApp() {
             <HoldPiecePreview compact />
           </div>
           <div className='transform scale-90 origin-center'>
+            <NextPiecePreview compact />
           </div>
           <div className='transform scale-90 origin-center'>
             <GameStats compact />
@@ -65,6 +67,7 @@ export default function TetrisApp() {
 
         {/* Right sidebar: hidden on small screens, spans 2 cols on md+ */}
         <aside className='hidden md:block md:col-span-2 space-y-1 overflow-y-auto'>
+          <NextPiecePreview />
         </aside>
       </div>
     </div>
