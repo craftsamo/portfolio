@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from '@/store';
 import { setLoading, setStatus } from '@/store/slices/tetris';
 import { LoadingScreen } from './components/LoadingScreen';
 import { GameBoard } from './components/GameBoard';
+import { HoldPiecePreview } from './components/HoldPiecePreview';
 import { GameStats } from './components/GameStats';
 import { useGameEngine } from './hooks/useGameEngine';
 
@@ -38,6 +39,7 @@ export default function TetrisApp() {
       <div className='md:hidden flex-shrink-0 px-0.5 mb-1'>
         <div className='grid grid-cols-3 gap-0.5'>
           <div className='transform scale-90 origin-center'>
+            <HoldPiecePreview compact />
           </div>
           <div className='transform scale-90 origin-center'>
           </div>
@@ -50,6 +52,7 @@ export default function TetrisApp() {
       <div className='grid grid-cols-10 gap-0.5 md:gap-0.5 lg:gap-1 flex-1 min-h-0 overflow-hidden'>
         {/* Left sidebar: hidden on small screens, spans 2 cols on md+ */}
         <aside className='hidden md:block md:col-span-2 space-y-1 overflow-y-auto'>
+          <HoldPiecePreview />
           <GameStats />
         </aside>
 
