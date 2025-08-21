@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Header, Main, Controller } from '../components';
+import { GameController } from './components/GameController';
 
 export const metadata: Metadata = {
   title: 'Tetris | Games',
@@ -19,6 +20,7 @@ export default function TetrisLayout({ children }: { children: ReactNode }) {
 
         {/* Controller - adaptive height with constraints */}
         <Controller className='flex-shrink-0 py-1 sm:py-2'>
+          <GameController />
         </Controller>
       </div>
     </div>
