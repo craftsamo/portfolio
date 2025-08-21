@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store';
 import { setLoading, setStatus } from '@/store/slices/tetris';
 import { LoadingScreen } from './components/LoadingScreen';
+import { GameBoard } from './components/GameBoard';
 import { useGameEngine } from './hooks/useGameEngine';
 
 /**
@@ -52,6 +53,7 @@ export default function TetrisApp() {
         {/* Main content: full-width on mobile (col-span-10), 6 cols on md+ */}
         <main className='col-span-10 md:col-span-6 flex justify-center items-center min-h-0'>
           <div className='w-full h-full flex items-center justify-center overflow-hidden'>
+            <GameBoard />
           </div>
         </main>
 
