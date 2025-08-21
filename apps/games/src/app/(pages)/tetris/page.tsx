@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store';
-import { setLoading } from '@/store/slices/tetris';
+import { setLoading, setStatus } from '@/store/slices/tetris';
 import { LoadingScreen } from './components/LoadingScreen';
 
 /**
@@ -14,13 +14,15 @@ export default function TetrisApp() {
   const tetrisState = useAppSelector((state) => state.tetris);
   const dispatch = useAppDispatch();
 
-  // Simulate loading state
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(setLoading(tetrisState.status === 'init'));
-    }, 5000);
+      dispatch(setLoading(false));
+      if (tetrisState.status === 'init') {
+        dispatch(setStatus('ready'));
+      }
+    }, 2000);
     return () => clearTimeout(timer);
-  }, [tetrisState.status, dispatch]);
+  }, [dispatch, tetrisState.status]);
 
   return tetrisState.loading ? (
     <LoadingScreen />
