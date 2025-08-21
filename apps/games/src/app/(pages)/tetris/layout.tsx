@@ -9,12 +9,16 @@ export const metadata: Metadata = {
 
 export default function TetrisLayout({ children }: { children: ReactNode }) {
   return (
-    <div className='max-h-screen flex flex-col justify-center items-center overflow-hidden font-mono select-none'>
-      <div className='w-full max-w-7xl h-screen flex flex-col justify-between px-6'>
-        <Header className='pt-2' title='TETRIS' />
-        <Main>{children}</Main>
-        <Controller className='py-2'>
-          <div className='min-h-full rounded-xl bg-muted/50' />
+    <div className='h-screen flex flex-col overflow-hidden font-mono select-none bg-gray-900'>
+      <div className='w-full h-full flex flex-col px-0.5 sm:px-1 md:px-2'>
+        {/* Header - minimal fixed height */}
+        <Header className='flex-shrink-0 py-1 sm:py-2' title='TETRIS' />
+
+        {/* Main content - takes remaining space */}
+        <Main className='flex-1 min-h-0 overflow-hidden'>{children}</Main>
+
+        {/* Controller - adaptive height with constraints */}
+        <Controller className='flex-shrink-0 py-1 sm:py-2'>
         </Controller>
       </div>
     </div>
