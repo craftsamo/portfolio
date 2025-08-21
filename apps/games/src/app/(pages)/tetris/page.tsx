@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store';
 import { setLoading, setStatus } from '@/store/slices/tetris';
 import { LoadingScreen } from './components/LoadingScreen';
+import { useGameEngine } from './hooks/useGameEngine';
 
 /**
  * Responsive layout:
@@ -13,6 +14,9 @@ import { LoadingScreen } from './components/LoadingScreen';
 export default function TetrisApp() {
   const tetrisState = useAppSelector((state) => state.tetris);
   const dispatch = useAppDispatch();
+
+  // Initialize game engine
+  useGameEngine();
 
   useEffect(() => {
     const timer = setTimeout(() => {
