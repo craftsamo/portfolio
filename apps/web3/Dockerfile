@@ -23,6 +23,12 @@ RUN turbo prune --scope=web3 --docker
 ###############################################################################
 FROM node:20-alpine AS installer
 
+# Update Alpine package manager and install libc6-compat for compatibility
+RUN apk update && apk add --no-cache libc6-compat python3 python3-dev make g++ linux-headers libusb-dev eudev-dev
+
+# Make sure python points to python3 for node-gyp compatibility
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
 # Set working directory in the container
 WORKDIR /app
 
