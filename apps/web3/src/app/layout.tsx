@@ -6,7 +6,7 @@ import { cookieToInitialState } from 'wagmi';
 import type { LayoutProps } from '@workspace/types/web';
 import { Toaster } from '@workspace/ui/components/sonner';
 import '@workspace/ui/globals.css';
-import { ReduxToolProvider, ThemeProvider, WagmiProvider } from '@/components/Providers';
+import { ReduxToolProvider, ThemeProvider, WagmiProvider, SolanaProvider } from '@/components/Providers';
 import { NavBar } from './components/NavBar';
 
 const fontSans = Geist({
@@ -38,8 +38,10 @@ export default async function RootLayout(props: LayoutProps) {
         <ReduxToolProvider>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <WagmiProvider initialState={initialState}>
-              <NavBar className='fixed' />
-              {props.children}
+              <SolanaProvider>
+                <NavBar className='fixed' />
+                {props.children}
+              </SolanaProvider>
             </WagmiProvider>
             <Toaster />
           </ThemeProvider>
