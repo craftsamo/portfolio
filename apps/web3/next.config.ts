@@ -25,6 +25,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  webpack: (config) => {
+    config.externals.push('pino-pretty');
+    return config;
+  },
+
   experimental: {
     serverActions: {
       allowedOrigins: ['host.docker.internal:3000', 'localhost'],
