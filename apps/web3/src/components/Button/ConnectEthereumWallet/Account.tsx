@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
 import { Skeleton } from '@workspace/ui/components/skeleton';
+import { useMemo } from 'react';
 
 interface EnsAvatarProps {
   className?: string;
@@ -27,13 +28,17 @@ const EnsAvatar = ({ className = 'h-9 w-9', address, shortAddress }: EnsAvatarPr
   const { data: ensName, isLoading: isEnsNameLoading } = useEnsName({ address });
   const { data: ensAvatar, isLoading: isEnsAvatarLoading } = useEnsAvatar({ name: ensName! });
   const isLoading = isEnsNameLoading || isEnsAvatarLoading;
-  return isLoading ? (
-    <Skeleton className={cn('rounded-full', className)} />
-  ) : (
-    <Avatar className={cn(className)}>
-      {ensAvatar && <AvatarImage src={ensAvatar} />}
-      <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : shortAddress.slice(2, 4).toUpperCase()}</AvatarFallback>
-    </Avatar>
+  return useMemo(
+    () =>
+      isLoading ? (
+        <Skeleton className={cn('rounded-full', className)} />
+      ) : (
+        <Avatar className={cn(className)}>
+          {ensAvatar && <AvatarImage src={ensAvatar} />}
+          <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : shortAddress.slice(2, 4).toUpperCase()}</AvatarFallback>
+        </Avatar>
+      ),
+    [className, ensAvatar, ensName, isLoading, shortAddress],
   );
 };
 
@@ -48,16 +53,11 @@ export const EnsName = ({ className, address, shortAddress }: EnsNameProps) => {
   return (
     <div className={cn('flex flex-col items-start text-left', isEnsNameLoading && 'space-y-1', className)}>
       {isEnsNameLoading ? (
-        <>
-          <Skeleton className='h-4 w-32' />
-          <Skeleton className='h-4 w-32' />
-        </>
+        <Skeleton className='h-4 w-32' />
       ) : (
-        <>
-          <span className='font-semibold text-base text-foreground'>{ensName ? ensName : shortAddress}</span>
-          {ensName && <span className='text-sm text-muted-foreground tracking-wide font-mono'>{shortAddress}</span>}
-        </>
+        ensName && <span className='font-semibold text-base text-foreground'>{ensName ? ensName : shortAddress}</span>
       )}
+      <span className='text-sm text-muted-foreground tracking-wide font-mono'>{shortAddress}</span>
     </div>
   );
 };
