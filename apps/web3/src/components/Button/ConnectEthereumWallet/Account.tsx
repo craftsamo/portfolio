@@ -1,6 +1,7 @@
 'use client';
 
 import { Unlink2 } from 'lucide-react';
+import { NetworkEthereum } from '@web3icons/react';
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
@@ -84,12 +85,9 @@ export const Account = ({ className, title, description }: AccountProps) => {
     <div className={cn('flex items-center', className)}>
       <Dialog>
         <DialogTrigger asChild>
-          <Button
-            variant='outline'
-            className='flex items-center gap-3 px-6 py-6 rounded-full hover:bg-accent/60 transition-colors border border-gray-200 shadow-sm'
-          >
-            <EnsAvatar shortAddress={shortAddress} address={address} />
-            <EnsName shortAddress={shortAddress} address={address} />
+          <Button variant='outline'>
+            <NetworkEthereum variant='branded' size={64} />
+            {shortAddress}
           </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-md'>
