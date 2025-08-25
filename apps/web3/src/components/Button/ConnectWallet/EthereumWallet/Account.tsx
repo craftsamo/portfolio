@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Unlink2 } from 'lucide-react';
 import { NetworkEthereum } from '@web3icons/react';
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
@@ -15,7 +16,6 @@ import {
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
 import { Skeleton } from '@workspace/ui/components/skeleton';
-import { useMemo } from 'react';
 
 interface EnsAvatarProps {
   className?: string;

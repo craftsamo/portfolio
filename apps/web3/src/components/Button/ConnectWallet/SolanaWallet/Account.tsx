@@ -26,7 +26,6 @@ interface EnsNameProps {
 export const EnsName = ({ className, publicKey, shortAddress }: EnsNameProps) => {
   const { connection } = useConnection();
   const { data, isPending } = useReverseLookup(connection, publicKey);
-
   return (
     <div className={cn('flex flex-col items-start text-left', isPending && 'space-y-1', className)}>
       {isPending ? (
