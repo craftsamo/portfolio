@@ -31,13 +31,13 @@ export const HeroSection = () => {
       initial='hidden'
       animate='visible'
       variants={container}
-      className='relative flex items-center justify-center min-h-[70vh] py-12 overflow-hidden'
+      className='relative flex items-center justify-center pt-24 overflow-hidden'
       aria-labelledby='hero-title'
     >
       <div className='pointer-events-none absolute inset-0 z-0' />
       <div className='container mx-auto px-4 relative z-10'>
         <div className='relative z-10 max-w-4xl mx-auto text-center'>
-          <SparklesText text='Welcome' sparklesCount={15} />
+          <SparklesText text='Connect Wallet' sparklesCount={15} />
 
           {/* Accent Line below title */}
           <motion.div
@@ -49,12 +49,11 @@ export const HeroSection = () => {
             variants={item}
             className='mt-8 text-xl md:text-2xl text-muted-foreground font-semibold max-w-2xl mx-auto drop-shadow-lg'
           >
-            A fullstack portfolio template featuring reusable UI components, scalable architecture, and seamless developer
-            experience — powered by Turborepo.
+            This is a demo app for connecting EthereumWallet and SolanaWallet.
           </motion.p>
 
           <motion.div variants={item} className='mt-12 flex justify-center gap-4'>
-            <Link href='https://github.com/itou-rui/turborepo-starter' target='_blank' rel='noopener noreferrer'>
+            <Link href='https://github.com/itou-rui/portfolio' target='_blank' rel='noopener noreferrer'>
               <Button
                 size='lg'
                 variant='outline'
