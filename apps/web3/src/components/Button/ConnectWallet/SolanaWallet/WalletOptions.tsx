@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback } from 'react';
-import { WalletIcon, NetworkSolana } from '@web3icons/react';
 import { WalletReadyState } from '@solana/wallet-adapter-base';
 import { useWallet, type Wallet } from '@solana/wallet-adapter-react';
 import { Button } from '@workspace/ui/components/button';
@@ -14,6 +13,7 @@ import {
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
 import { cn } from '@workspace/ui/lib/utils';
+import { NetworkIcon, WalletIcon } from '../Icons';
 
 interface WalletOptionProps {
   connector: Wallet;
@@ -33,7 +33,7 @@ export const WalletOption = ({ connector }: WalletOptionProps) => {
 
   return (
     <Button disabled={connector.readyState === WalletReadyState.Unsupported} onClick={handleWalletSelect}>
-      <WalletIcon id={connector.adapter.name} variant='branded' />
+      <WalletIcon name={connector.adapter.name} />
       {buttonText}
     </Button>
   );
@@ -57,7 +57,7 @@ export const WalletOptions = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button variant='outline' className={cn(className)}>
-          <NetworkSolana variant='branded' />
+          <NetworkIcon id='solana' />
           {buttonText}
         </Button>
       </DialogTrigger>
