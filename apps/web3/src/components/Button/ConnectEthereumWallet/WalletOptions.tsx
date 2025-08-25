@@ -1,8 +1,8 @@
 'use client';
 
-import { Link2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useConnect, type Connector } from 'wagmi';
+import { WalletIcon, NetworkEthereum } from '@web3icons/react';
 import { Button } from '@workspace/ui/components/button';
 import { cn } from '@workspace/ui/lib/utils';
 import {
@@ -31,6 +31,7 @@ const WalletOption = ({ connector, onClick }: WalletOptionProps) => {
 
   return (
     <Button disabled={!ready} onClick={onClick}>
+      <WalletIcon id={connector.name} variant='branded' />
       {connector.name}
     </Button>
   );
@@ -53,8 +54,8 @@ export const WalletOptions = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='outline' className={cn(className)}>
-          <Link2 />
+        <Button size='lg' variant='outline' className={cn(className)}>
+          <NetworkEthereum variant='branded' size={64} />
           {buttonText}
         </Button>
       </DialogTrigger>
