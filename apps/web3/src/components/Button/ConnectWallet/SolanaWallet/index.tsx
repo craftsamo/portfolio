@@ -1,7 +1,7 @@
 'use client';
 
 import { useWallet } from '@solana/wallet-adapter-react';
-import { Connecting } from './Connecting';
+import { Connecting } from '../Connecting';
 import { Account } from './Account';
 import { WalletOptions } from './WalletOptions';
 

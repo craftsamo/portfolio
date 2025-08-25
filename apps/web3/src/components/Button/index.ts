@@ -1,2 +1,1 @@
-export * from './ConnectEthereumWallet';
-export * from './ConnectSolanaWallet';
+export * from './ConnectWallet';

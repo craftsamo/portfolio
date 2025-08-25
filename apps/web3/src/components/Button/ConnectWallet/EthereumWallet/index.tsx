@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccount } from 'wagmi';
-import { Connecting } from './Connecting';
+import { Connecting } from '../Connecting';
 import { WalletOptions } from './WalletOptions';
 import { Account } from './Account';
 
