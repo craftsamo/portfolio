@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { Unlink2 } from 'lucide-react';
-import { NetworkEthereum } from '@web3icons/react';
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
@@ -16,6 +15,7 @@ import {
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
 import { Skeleton } from '@workspace/ui/components/skeleton';
+import { NetworkIcon } from '../Icons';
 
 interface EnsAvatarProps {
   className?: string;
@@ -79,14 +79,14 @@ export interface AccountProps {
 }
 
 export const Account = ({ className, title, description }: AccountProps) => {
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
   const shortAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
   return (
     <div className={cn('flex items-center', className)}>
       <Dialog>
         <DialogTrigger asChild>
           <Button variant='outline'>
-            <NetworkEthereum variant='branded' size={64} />
+            <NetworkIcon id={`${chainId || 1}`} />
             {shortAddress}
           </Button>
         </DialogTrigger>

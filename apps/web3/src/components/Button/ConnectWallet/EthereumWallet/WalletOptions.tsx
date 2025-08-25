@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useConnect, type Connector } from 'wagmi';
-import { WalletIcon, NetworkEthereum } from '@web3icons/react';
 import { Button } from '@workspace/ui/components/button';
 import { cn } from '@workspace/ui/lib/utils';
 import {
@@ -13,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
+import { NetworkIcon, WalletIcon } from '../Icons';
 
 interface WalletOptionProps {
   connector: Connector;
@@ -31,7 +31,7 @@ const WalletOption = ({ connector, onClick }: WalletOptionProps) => {
 
   return (
     <Button disabled={!ready} onClick={onClick}>
-      <WalletIcon id={connector.name} variant='branded' />
+      <WalletIcon name={connector.name} />
       {connector.name}
     </Button>
   );
@@ -55,7 +55,7 @@ export const WalletOptions = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button size='lg' variant='outline' className={cn(className)}>
-          <NetworkEthereum variant='branded' size={64} />
+          <NetworkIcon id='1' />
           {buttonText}
         </Button>
       </DialogTrigger>

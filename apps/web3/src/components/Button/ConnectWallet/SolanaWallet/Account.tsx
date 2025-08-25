@@ -1,7 +1,6 @@
 'use client';
 
 import { Unlink2 } from 'lucide-react';
-import { NetworkSolana } from '@web3icons/react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import type { PublicKey } from '@solana/web3.js';
 import { useReverseLookup } from '@bonfida/sns-react';
@@ -16,6 +15,7 @@ import {
   DialogTrigger,
 } from '@workspace/ui/components/dialog';
 import { Skeleton } from '@workspace/ui/components/skeleton';
+import { NetworkIcon } from '../Icons';
 
 interface EnsNameProps {
   className?: string;
@@ -63,7 +63,7 @@ export const Account = ({ className, title, description }: AccountProps) => {
       <Dialog>
         <DialogTrigger asChild>
           <Button variant='outline'>
-            <NetworkSolana variant='branded' />
+            <NetworkIcon id='solana' />
             {shortAddress}
           </Button>
         </DialogTrigger>
