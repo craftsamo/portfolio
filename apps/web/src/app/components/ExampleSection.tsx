@@ -35,6 +35,12 @@ const examples = [
     buttonText: 'Play Games',
     href: 'https://portfolio-games.itourui.dev',
   },
+  {
+    title: 'Web3',
+    description: 'An app to connect Ethereum and Solana wallets',
+    buttonText: 'Open Web3',
+    href: 'https://portfolio-web3.itourui.dev',
+  },
 ];
 
 export const ExampleSection = () => (
