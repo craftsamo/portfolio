@@ -7,8 +7,14 @@ const withBundleAnalyzer = initializeBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.glsl$/,
+      use: 'raw-loader',
+    });
+    return config;
+  },
   transpilePackages: ['@workspace/ui'],
-
   images: {
     remotePatterns: [
       {
