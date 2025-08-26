@@ -2,18 +2,17 @@
 
 import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider as WagmiProviderCore, type State } from 'wagmi';
+import { WagmiProvider as WagmiProviderCore, type WagmiProviderProps as WagmiProviderCoreProps } from 'wagmi';
 import { config } from '@/config/wagmi';
 
 const queryClient = new QueryClient();
 
-export interface WagmiProviderProps {
+export interface WagmiProviderProps extends Omit<WagmiProviderCoreProps, 'config'> {
   children: ReactNode;
-  initialState?: State;
 }
 
-export const WagmiProvider = ({ children, initialState }: WagmiProviderProps) => (
-  <WagmiProviderCore config={config} initialState={initialState}>
+export const WagmiProvider = ({ children, ...props }: WagmiProviderProps) => (
+  <WagmiProviderCore config={config} {...props}>
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   </WagmiProviderCore>
 );

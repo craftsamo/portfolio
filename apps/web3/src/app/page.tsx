@@ -3,7 +3,7 @@ import { HeroSection } from './components/HeroSection';
 import { EthereumCard } from './components/EthereumCard';
 import { SolanaCard } from './components/SolanaCard';
 
-export default async function Portfolio() {
+export default async function RootPage() {
   return (
     <Box>
       <HeroSection />
