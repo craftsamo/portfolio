@@ -113,6 +113,14 @@ jobs:
             else
               export BASE_URL="https://portfolio-games-develop.${{ vars.DOMAIN }}"
             fi
+
+          ## Environment variables specific to `apps/web3`
+          elif [ "${{ inputs.app_name }}" == "web3" ]; then
+            if [ "${{ inputs.environment }}" == "production" ]; then
+              export BASE_URL="https://portfolio-web3.${{ vars.DOMAIN }}"
+            else
+              export BASE_URL="https://portfolio-web3-develop.${{ vars.DOMAIN }}"
+            fi
           fi
 
           ## NOTE: ...increase as `apps/**` is added

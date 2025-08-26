@@ -28,6 +28,12 @@
     "turbo": "2.3.3",
     "typescript": "^5.1.3"
   },
+  "resolutions": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "@web3icons/react/react": "19.1.1",
+    "@web3icons/react/react-dom": "19.1.1"
+  },
   "engines": {
     "node": ">=20"
   },

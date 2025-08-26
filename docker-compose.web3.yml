@@ -1,0 +1,25 @@
+services:
+  web:
+    container_name: portfolio-web3
+    image: web3:latest
+    build:
+      context: .
+      dockerfile: ./apps/web3/Dockerfile
+    env_file:
+      - ./apps/web3/.env
+    environment:
+      - PORT=3000
+      - HOSTNAME="0.0.0.0"
+      - NODE_ENV=production
+      - BASE_URL="http://localhost:3000"
+    stop_signal: SIGINT
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
