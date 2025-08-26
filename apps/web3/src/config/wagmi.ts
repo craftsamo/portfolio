@@ -9,6 +9,19 @@ export const config = createConfig({
   storage: createStorage({
     storage: cookieStorage,
   }),
+  connectors: [injected(), metaMask()],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
+});
+
+export const testConfig = createConfig({
+  chains: [mainnet, sepolia],
+  ssr: true,
+  storage: createStorage({
+    storage: cookieStorage,
+  }),
   connectors: [
     injected(),
     metaMask(),
