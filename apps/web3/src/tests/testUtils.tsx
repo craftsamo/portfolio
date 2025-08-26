@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
+import type { NextRouter } from 'next/router';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
+import type { JSXElementConstructor, ReactElement, ReactNode } from 'react';
+import { render } from '@testing-library/react';
 import { vi } from 'vitest';
 import { ReduxToolProvider, SolanaProvider, ThemeProvider, WagmiProvider } from '@/components/Providers';
-import type { NextRouter } from 'next/router';
-import type { JSXElementConstructor, ReactElement, ReactNode } from 'react';
 
 const mockRouter: NextRouter = {
   basePath: '',
