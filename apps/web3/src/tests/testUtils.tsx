@@ -4,6 +4,7 @@ import type { JSXElementConstructor, ReactElement, ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { vi } from 'vitest';
 import { ReduxToolProvider, SolanaProvider, ThemeProvider, WagmiProvider } from '@/components/Providers';
+import { testConfig } from '@/config/wagmi';
 
 const mockRouter: NextRouter = {
   basePath: '',
@@ -34,7 +35,7 @@ export function customRender(ui: ReactElement<any, string | JSXElementConstructo
     <RouterContext.Provider value={{ ...mockRouter, ...router }}>
       <ReduxToolProvider>
         <ThemeProvider defaultTheme='light' enableSystem={false}>
-          <WagmiProvider>
+          <WagmiProvider config={testConfig}>
             <SolanaProvider>{children}</SolanaProvider>
           </WagmiProvider>
         </ThemeProvider>
