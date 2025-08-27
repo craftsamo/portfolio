@@ -5,6 +5,7 @@ import { Toaster } from '@workspace/ui/components/sonner';
 import '@workspace/ui/globals.css';
 import { ReduxToolProvider, ThemeProvider } from '@/components/Providers';
 import { NavBar } from './components/NavBar';
+import { PageBackground } from '@/components/Background';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -32,8 +33,10 @@ export default async function RootLayout(props: LayoutProps) {
         <ReduxToolProvider>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <NavBar className='fixed' />
-            {props.children}
-            <Toaster />
+            <PageBackground>
+              {props.children}
+              <Toaster />
+            </PageBackground>
           </ThemeProvider>
         </ReduxToolProvider>
       </body>
