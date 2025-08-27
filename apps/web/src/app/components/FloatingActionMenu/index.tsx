@@ -1,0 +1,54 @@
+'use client';
+
+import { useState, type ReactNode } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
+import { cn } from '@workspace/ui/lib/utils';
+import { ToggleButton } from './ToggleButton';
+
+const Wrap = ({ index, children }: { index: number; children: ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: 20 }}
+    transition={{ duration: 0.3, delay: index * 0.05 }}
+  >
+    {children}
+  </motion.div>
+);
+
+type FloatingActionMenuProps = {
+  className?: string;
+};
+
+export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className={cn('fixed bottom-8 right-8', className)}>
+      <ToggleButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 10, y: 10, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, x: 10, y: 10, filter: 'blur(10px)' }}
+            transition={{
+              duration: 0.6,
+              type: 'spring',
+              stiffness: 300,
+              damping: 20,
+              delay: 0.1,
+            }}
+            className='absolute bottom-10 right-0 mb-4'
+          >
+            <div className='flex flex-col items-end gap-2'>
+              <Wrap index={0}>
+                <ThemeToggle className='flex items-center gap-2 rounded-full' />
+              </Wrap>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
