@@ -1,12 +1,12 @@
-import { HeroSection } from './components/HeroSection';
-import { AboutSection } from './components/AboutSection';
-import { ExampleSection } from './components/ExampleSection';
 import { Box } from '@/components/Layout';
 import { SectionScrollHandler } from './components/SectionScrollHandler';
 import { AnimateSection } from './components/AnimateSection';
+import { AboutSection, HeroSection, ShowcaseSection } from './sections';
+
 const sections = [
   { id: 'hero', component: <HeroSection /> },
   { id: 'about', component: <AboutSection /> },
+  { id: 'showcase', component: <ShowcaseSection /> },
 ];
 
 export default async function Portfolio() {
