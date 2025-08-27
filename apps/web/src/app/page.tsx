@@ -5,7 +5,6 @@ import { ExampleSection } from './components/ExampleSection';
 
 export default async function Portfolio() {
   return (
-    <Box>
       {/* Hero section */}
       <Rows id='hero' className='sm:pt-28 grid-cols-1'>
         <HeroSection />
@@ -20,6 +19,10 @@ export default async function Portfolio() {
       <Rows id='examples' className='sm:pt-12 grid-cols-1 gap-6 px-5'>
         <ExampleSection />
       </Rows>
+    <Box
+      className='h-screen overflow-hidden flex flex-col items-stretch justify-stretch'
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
     </Box>
   );
 }
