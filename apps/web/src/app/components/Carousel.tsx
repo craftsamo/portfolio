@@ -186,7 +186,7 @@ export const Carousel = ({ carouselItems, autoplay = true }: CarouselProps) => {
               exit='exit'
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <h3 className={cn('mb-[0.15rem] text-[1.1rem] text-black font-bold', 'md:mb-[0.25rem] md:text-[1.5rem]')}>
+              <h3 className={cn('mb-[0.15rem] text-[1.1rem] font-bold', 'md:mb-[0.25rem] md:text-[1.5rem]')}>
                 {activeCarouselItem.title}
               </h3>
               <motion.p
