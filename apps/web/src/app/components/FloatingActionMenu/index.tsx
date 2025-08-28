@@ -6,6 +6,7 @@ import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
 import { cn } from '@workspace/ui/lib/utils';
 import { LiquidGlassButton } from '@/components/Button';
 import { ToggleButton } from './ToggleButton';
+import { ScrollTopButton } from './ScrollTopButton';
 
 const Wrap = ({ index, children }: { index: number; children: ReactNode }) => (
   <motion.div
@@ -25,6 +26,7 @@ type FloatingActionMenuProps = {
 export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+  const close = () => setIsOpen(false);
   return (
     <div className={cn('fixed bottom-8 right-8', className)}>
       <ToggleButton isOpen={isOpen} onClick={toggle} />
@@ -41,9 +43,9 @@ export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
               damping: 20,
               delay: 0.1,
             }}
-            className='absolute bottom-10 right-0 mb-4'
+            className='absolute bottom-10 right-0 mb-6'
           >
-            <div className='flex flex-col items-end gap-2'>
+            <div className='flex flex-col items-end gap-4'>
               <Wrap index={0}>
                 <LiquidGlassButton
                   size='lg'
@@ -55,6 +57,9 @@ export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
                 >
                   <ThemeToggle className='bg-transparent border-transparent rounded-full' />
                 </LiquidGlassButton>
+              </Wrap>
+              <Wrap index={1}>
+                <ScrollTopButton close={close} />
               </Wrap>
             </div>
           </motion.div>
