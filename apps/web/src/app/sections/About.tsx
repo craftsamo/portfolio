@@ -14,6 +14,7 @@ const container = {
 };
 
 const item = {
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     x: 0,

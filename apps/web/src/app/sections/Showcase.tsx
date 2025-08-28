@@ -56,7 +56,7 @@ export const ShowcaseSection = () => {
       className='flex items-center justify-center min-h-[100vh] overflow-hidden'
       aria-labelledby='about-title'
     >
-      <Center className='space-y-4'>
+      <Center className='space-y-2 md:space-y-4'>
         <SparklesText text='Showcase' />
         <motion.div
           variants={item}

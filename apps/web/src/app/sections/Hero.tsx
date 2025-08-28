@@ -33,7 +33,7 @@ export const HeroSection = () => {
       className='flex items-center justify-center min-h-[100vh] overflow-hidden'
       aria-labelledby='about-title'
     >
-      <Center className='space-y-4'>
+      <Center className='space-y-2'>
         <SparklesText text='Welcome' />
         <motion.div
           variants={item}
@@ -43,8 +43,10 @@ export const HeroSection = () => {
           variants={item}
           className='text-xl md:text-2xl text-center text-muted-foreground font-semibold max-w-2xl drop-shadow-lg'
         >
-          Showcase your skills and projects with a stunning, fullstack portfolio template. Crafted for modern developers,
-          it features elegant reusable components, a scalable architecture, and a delightful developer experience—so you can focus on what matters: telling your story and making your mark.<br />
+          Showcase your skills and projects with a stunning, fullstack portfolio template. Crafted for modern developers, it
+          features elegant reusable components, a scalable architecture, and a delightful developer experience—so you can focus on
+          what matters: telling your story and making your mark.
+          <br />
           <br />
           Start customizing and deploy your unique portfolio today.
         </motion.p>
