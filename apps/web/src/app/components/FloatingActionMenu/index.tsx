@@ -24,9 +24,10 @@ type FloatingActionMenuProps = {
 
 export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
   return (
     <div className={cn('fixed bottom-8 right-8', className)}>
-      <ToggleButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+      <ToggleButton isOpen={isOpen} onClick={toggle} />
       <AnimatePresence>
         {isOpen && (
           <motion.div
