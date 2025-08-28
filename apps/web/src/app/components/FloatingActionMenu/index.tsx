@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
 import { cn } from '@workspace/ui/lib/utils';
+import { LiquidGlassButton } from '@/components/Button';
 import { ToggleButton } from './ToggleButton';
 
 const Wrap = ({ index, children }: { index: number; children: ReactNode }) => (
@@ -43,7 +44,16 @@ export const FloatingActionMenu = ({ className }: FloatingActionMenuProps) => {
           >
             <div className='flex flex-col items-end gap-2'>
               <Wrap index={0}>
-                <ThemeToggle className='flex items-center gap-2 rounded-full' />
+                <LiquidGlassButton
+                  size='lg'
+                  className='w-10 h-10 rounded-full'
+                  onClick={(e) => {
+                    const button = e.currentTarget.querySelector('button, [role="button"]') as HTMLElement | null;
+                    if (button) button.click();
+                  }}
+                >
+                  <ThemeToggle className='bg-transparent border-transparent rounded-full' />
+                </LiquidGlassButton>
               </Wrap>
             </div>
           </motion.div>
