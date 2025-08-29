@@ -1,5 +1,6 @@
 ---
 description: Commit the currently staged files
+agent: build
 model: github-copilot/gpt-4.1
 ---
 
