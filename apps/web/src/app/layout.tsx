@@ -4,7 +4,8 @@ import type { LayoutProps } from '@workspace/types/web';
 import { Toaster } from '@workspace/ui/components/sonner';
 import '@workspace/ui/globals.css';
 import { ReduxToolProvider, ThemeProvider } from '@/components/Providers';
-import { NavBar } from './components/NavBar';
+import { PageBackground } from '@/components/Background';
+import { FloatingActionMenu } from './components/FloatingActionMenu';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -31,9 +32,11 @@ export default async function RootLayout(props: LayoutProps) {
       <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}>
         <ReduxToolProvider>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            <NavBar className='fixed' />
-            {props.children}
-            <Toaster />
+            <PageBackground>
+              {props.children}
+              <FloatingActionMenu />
+              <Toaster />
+            </PageBackground>
           </ThemeProvider>
         </ReduxToolProvider>
       </body>
