@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import counterReducer from './slices/counter';
+import sectionInViewReducer from './slices/sectionInView';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    sectionInView: sectionInViewReducer,
   },
 });
 
