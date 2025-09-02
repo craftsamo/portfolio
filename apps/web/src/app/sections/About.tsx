@@ -30,7 +30,7 @@ export const AboutSection = () => {
       whileInView='visible'
       viewport={{ once: true, amount: 0.5 }}
       variants={container}
-      className='flex items-center justify-center min-h-[100vh] overflow-hidden'
+      className='flex items-center justify-center h-[calc(var(--vh)*100)] overflow-hidden'
       aria-labelledby='about-title'
     >
       <Center className='space-y-2'>

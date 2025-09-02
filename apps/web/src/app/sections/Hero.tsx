@@ -30,18 +30,18 @@ export const HeroSection = () => {
       whileInView='visible'
       viewport={{ once: true, amount: 0.5 }}
       variants={container}
-      className='flex items-center justify-center min-h-[100vh] overflow-hidden'
+      className='flex items-center justify-center h-[calc(var(--vh)*100)] box-border max-w-full px-4 sm:px-8 py-12'
       aria-labelledby='about-title'
     >
-      <Center className='space-y-2'>
-        <SparklesText text='Welcome' />
+      <Center className='space-y-4 max-w-full sm:max-w-md md:max-w-2xl w-full mx-auto py-12'>
+        <SparklesText text='Welcome' className='text-4xl sm:text-6xl' />
         <motion.div
           variants={item}
           className='h-1.5 w-20 rounded-full bg-gradient-to-r from-blue-400 via-pink-400 to-purple-400 opacity-80 shadow-lg'
         />
         <motion.p
           variants={item}
-          className='text-xl md:text-2xl text-center text-muted-foreground font-semibold max-w-2xl drop-shadow-lg'
+          className='text-base sm:text-lg md:text-2xl text-center text-muted-foreground font-semibold max-w-full sm:max-w-md md:max-w-2xl drop-shadow-lg leading-relaxed'
         >
           Showcase your skills and projects with a stunning, fullstack portfolio template. Crafted for modern developers, it
           features elegant reusable components, a scalable architecture, and a delightful developer experience—so you can focus on
