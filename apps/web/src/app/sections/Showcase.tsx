@@ -53,7 +53,7 @@ export const ShowcaseSection = () => {
       whileInView='visible'
       viewport={{ once: true, amount: 0.5 }}
       variants={container}
-      className='flex items-center justify-center min-h-[100vh] overflow-hidden'
+      className='flex items-center justify-center h-[calc(var(--vh)*100)]'
       aria-labelledby='about-title'
     >
       <Center className='space-y-2 md:space-y-4'>
