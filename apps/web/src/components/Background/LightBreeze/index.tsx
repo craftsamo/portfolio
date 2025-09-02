@@ -27,7 +27,7 @@ export const LightBreeze = ({ children }: LightBreezeProps) => {
     renderer.domElement.style.top = '0';
     renderer.domElement.style.left = '0';
     renderer.domElement.style.width = '100vw';
-    renderer.domElement.style.height = '100vh';
+    renderer.domElement.style.height = 'calc(var(--vh) * 100)';
     renderer.domElement.style.zIndex = '0';
     renderer.domElement.style.pointerEvents = 'none';
     container.appendChild(renderer.domElement);
@@ -76,7 +76,7 @@ export const LightBreeze = ({ children }: LightBreezeProps) => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+    <div style={{ position: 'relative', width: '100vw', height: 'calc(var(--vh) * 100)' }}>
       <div
         ref={containerRef}
         className='fixed inset-0 w-full h-full pointer-events-none z-0'
@@ -85,12 +85,12 @@ export const LightBreeze = ({ children }: LightBreezeProps) => {
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: 'calc(var(--vh) * 100)',
           zIndex: 0,
           pointerEvents: 'none',
         }}
       />
-      <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%' }}>{children}</div>
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>{children}</div>
     </div>
   );
 };
