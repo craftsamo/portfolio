@@ -2,6 +2,10 @@
 
 import * as THREE from 'three';
 import { useEffect, useRef, type ReactNode } from 'react';
+
+const TARGET_FPS = 30;
+const FRAME_DURATION = 1000 / TARGET_FPS;
+
 import vertexShader from './vertexShader.glsl';
 import fragmentShader from './fragmentShader.glsl';
 
@@ -36,9 +40,27 @@ export const ShootingStar = ({ children }: ShootingStarProps) => {
     scene.add(mesh);
 
     let frameId: number | undefined;
+    let lastFrameTime = performance.now();
+    let isActive = true;
+
+    const handleVisibilityChange = () => {
+      isActive = document.visibilityState === 'visible';
+      if (isActive) {
+        lastFrameTime = performance.now();
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     const animate = () => {
-      material.uniforms.iTime.value += 0.016;
-      renderer.render(scene, camera);
+      if (!isActive) return;
+      const now = performance.now();
+      const delta = now - lastFrameTime;
+      if (delta >= FRAME_DURATION) {
+        material.uniforms.iTime.value += delta / 1000;
+        renderer.render(scene, camera);
+        lastFrameTime = now;
+      }
       frameId = requestAnimationFrame(animate);
     };
     animate();
@@ -53,6 +75,7 @@ export const ShootingStar = ({ children }: ShootingStarProps) => {
       if (frameId !== undefined) {
         cancelAnimationFrame(frameId);
       }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
       if (container) {
         container.removeChild(renderer.domElement);

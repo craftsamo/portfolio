@@ -2,6 +2,10 @@
 
 import * as THREE from 'three';
 import { useEffect, useRef, type ReactNode } from 'react';
+
+const TARGET_FPS = 30;
+const FRAME_DURATION = 1000 / TARGET_FPS;
+
 import vertexShader from './vertexShader.glsl';
 import fragmentShader from './fragmentShader.glsl';
 
@@ -48,9 +52,26 @@ export const LightBreeze = ({ children }: LightBreezeProps) => {
     scene.add(mesh);
 
     let frameId: number | undefined;
+    let lastFrameTime = performance.now();
+    let isActive = true;
+
+    const handleVisibilityChange = () => {
+      isActive = document.visibilityState === 'visible';
+      if (isActive) {
+        lastFrameTime = performance.now();
+        animate(performance.now());
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     const animate = (time: number) => {
-      (material.uniforms as any).iTime.value = time * 0.001;
-      renderer.render(scene, camera);
+      if (!isActive) return;
+      const delta = time - lastFrameTime;
+      if (delta >= FRAME_DURATION) {
+        (material.uniforms as any).iTime.value = time * 0.001;
+        renderer.render(scene, camera);
+        lastFrameTime = time;
+      }
       frameId = requestAnimationFrame(animate);
     };
     frameId = requestAnimationFrame(animate);
@@ -65,6 +86,7 @@ export const LightBreeze = ({ children }: LightBreezeProps) => {
 
     return () => {
       if (frameId !== undefined) cancelAnimationFrame(frameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
       if (container && renderer.domElement.parentElement === container) {
         container.removeChild(renderer.domElement);
