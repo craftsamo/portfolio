@@ -12,8 +12,13 @@ const sections = [
 export default async function Portfolio() {
   return (
     <Box
-      className='h-screen overflow-hidden flex flex-col items-stretch justify-stretch'
-      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      className='fixed inset-0 w-screen h-screen overflow-hidden'
+      style={{
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        WebkitOverflowScrolling: 'touch',
+        touchAction: 'none',
+      }}
     >
       <SectionScrollHandler sectionCount={sections.length - 1}>
         {sections.map((section, index) => (
@@ -25,3 +30,4 @@ export default async function Portfolio() {
     </Box>
   );
 }
+

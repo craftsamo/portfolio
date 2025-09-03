@@ -144,7 +144,14 @@ export const Carousel = ({ carouselItems, autoplay = true }: CarouselProps) => {
   };
 
   return (
-    <div className={cn('flex flex-col box-border w-[100%] max-w-[56rem] p-[1rem]', 'md:p-[2rem]')}>
+    <div
+      className={cn(
+        'flex flex-col box-border w-[100%] max-w-[56rem] p-[1rem]',
+        'md:max-w-[40rem] md:p-[2rem]',
+        'lg:max-w-[48rem]',
+        'xl:max-w-[56rem]',
+      )}
+    >
       <div
         className={cn('flex flex-col gap-[0.7rem]', 'md:grid md:gap-[5rem]')}
         style={{
@@ -153,14 +160,21 @@ export const Carousel = ({ carouselItems, autoplay = true }: CarouselProps) => {
       >
         {/* Images */}
         <div
-          className={cn('relative min-w-[64px] w-[100%] min-h-[18vh] h-[25vh] perspective-[1000px]', 'md:h-[24rem]')}
+          className={cn(
+            'relative min-w-[64px] w-[100%] min-h-[18vh] h-[25vh] mb-2 perspective-[1000px]',
+            'md:h-[16rem] mb-0',
+            'lg:h-[18rem]',
+            'xl:h-[20rem]',
+          )}
           ref={imageContainerRef}
         >
           {carouselItems.map((carouselItem, index) => (
             <Image
               className={cn(
                 'absolute w-[100%] h-[100%] object-cover rounded-[0.5rem] shadow[0 2px 6px rgba(0,0,0,0.11)]',
-                'md:rounded-[1.5rem] md:shadow[0 10px 30px rgba(0, 0, 0, 0.2)]',
+                'md:rounded-[1rem] md:shadow[0 6px 18px rgba(0, 0, 0, 0.15)]',
+                'lg:rounded-[1.25rem] lg:shadow[0 8px 24px rgba(0, 0, 0, 0.18)]',
+                'xl:rounded-[1.5rem] xl:shadow[0 10px 30px rgba(0, 0, 0, 0.2)]',
               )}
               key={index}
               width={600}
@@ -191,8 +205,9 @@ export const Carousel = ({ carouselItems, autoplay = true }: CarouselProps) => {
               </h3>
               <motion.p
                 className={cn(
-                  'mb-[1.25rem] text-[0.98rem] leading-[1.5] text-gray-600',
-                  'md:mb-0 md:text-[1.125rem] md:leading-[1.75]',
+                  'mb-[0.25rem] text-[0.98rem] leading-[1.5] text-gray-600',
+                  'min-h-[5rem]',
+                  'md:mb-0 md:text-[1.125rem] md:leading-[1.75] md:min-h-0',
                 )}
               >
                 {activeCarouselItem.description.split(' ').map((word, i) => (

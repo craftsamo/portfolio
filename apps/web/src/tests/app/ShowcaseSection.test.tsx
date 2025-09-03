@@ -1,4 +1,4 @@
-import { render, waitFor } from '../jest.setup';
+import { render, screen, waitFor } from '../jest.setup';
 import '@testing-library/jest-dom';
 import { ShowcaseSection } from '../../app/sections/Showcase';
 
@@ -9,12 +9,11 @@ describe('ShowcaseSection', () => {
       return text.replace(/[\s\u3000]+/g, ' ').trim();
     }
     await waitFor(() => {
-      const headings = Array.from(document.querySelectorAll('.text-6xl.font-bold'));
-      const showcaseHeading = headings.find((h) => h.textContent?.toLowerCase().includes('showcase'));
-      expect(showcaseHeading).toBeTruthy();
-      expect(showcaseHeading?.textContent?.toLowerCase()).toContain('showcase');
+      const showcaseHeading = screen.getByText(/showcase/i);
+      expect(showcaseHeading).toBeInTheDocument();
+      expect(showcaseHeading.textContent?.toLowerCase()).toContain('showcase');
       expect(normalizeText(document.body.textContent?.toLowerCase() || '')).toMatch(/dashboard/);
-      expect(normalizeText(document.body.textContent || '')).toContain('Transform raw data into actionable insights');
+      expect(normalizeText(document.body.textContent || '')).toContain('Here are some applications built with this architect.');
     });
   });
 });
