@@ -14,17 +14,19 @@ export const AnimateSection = ({ index, children }: AnimateSectionProps) => {
   const isActive = current === index;
   const yFrom = direction === 'prev' ? -40 : 40;
   const yExit = direction === 'prev' ? 40 : -40;
+
   return (
     isActive && (
-      <AnimatePresence>
+      <AnimatePresence mode='wait'>
         <motion.div
-          className='w-full h-full flex-grow flex-shrink-0'
+          key={`section-${index}`}
+          className='fixed inset-0 w-screen h-screen overflow-hidden'
           initial={{ opacity: 0, y: yFrom }}
           animate={{ opacity: 1, y: 0, pointerEvents: 'auto' }}
           exit={{ opacity: 0, y: yExit }}
           transition={{ type: 'spring', stiffness: 120, damping: 18 }}
         >
-          {children}
+          <div className='w-full h-full overflow-hidden'>{children}</div>
         </motion.div>
       </AnimatePresence>
     )
