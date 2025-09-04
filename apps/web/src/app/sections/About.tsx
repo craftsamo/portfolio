@@ -43,7 +43,7 @@ export const AboutSection = () => {
       <Center className={cn('max-w-xs w-full', 'sm:max-w-md', 'md:max-w-2xl', 'lg:max-w-4xl', 'xl:max-w-5xl')}>
         <SparklesText
           text='About Me'
-          sparklesCount={10}
+          sparklesCount={5}
           className={cn('text-3xl', 'sm:text-4xl', 'md:text-5xl', 'lg:text-6xl', 'xl:text-7xl')}
         />
         <motion.div
