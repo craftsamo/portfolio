@@ -41,7 +41,11 @@ export const HeroSection = () => {
       aria-labelledby='hero-title'
     >
       <Center className={cn('space-y-1 max-w-xs w-full mx-auto', 'sm:max-w-md', 'md:max-w-2xl', 'lg:max-w-4xl', 'xl:max-w-5xl')}>
-        <SparklesText text='Welcome' className={cn('text-3xl', 'sm:text-4xl', 'md:text-5xl', 'lg:text-6xl', 'xl:text-7xl')} />
+        <SparklesText
+          text='Welcome'
+          sparklesCount={5}
+          className={cn('text-3xl', 'sm:text-4xl', 'md:text-5xl', 'lg:text-6xl', 'xl:text-7xl')}
+        />
         <motion.div
           variants={item}
           className={cn(
