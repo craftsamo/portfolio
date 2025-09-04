@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { OrbitingSkill } from './OrbitingSkill';
 import { GlowingOrbitPath } from './GlowingOrbitPath';
 import { skillsConfig } from './skillsConfig';
@@ -35,7 +35,9 @@ export const OrbitingSkills = ({
     xl: 480,
   },
 }: OrbitingSkillsProps) => {
-  const [time, setTime] = useState(0);
+  // const [time, setTime] = useState(0);
+  const [, setTime] = useState(0);
+  const timeRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
@@ -52,12 +54,17 @@ export const OrbitingSkills = ({
 
     let animationFrameId: number;
     let lastTime = performance.now();
+    let lastSetState = performance.now();
 
     const animate = (currentTime: number) => {
       const deltaTime = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
+      timeRef.current += deltaTime;
 
-      setTime((prevTime) => prevTime + deltaTime);
+      if (currentTime - lastSetState > 1000) {
+        setTime(timeRef.current);
+        lastSetState = currentTime;
+      }
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -70,8 +77,8 @@ export const OrbitingSkills = ({
     { radius: resolvedDiameter / 2.5, glowColor: 'purple', delay: 1.5 },
   ];
 
-  const inner = skillsConfig.filter((s) => s.orbitRadius <= 100);
-  const outer = skillsConfig.filter((s) => s.orbitRadius > 100);
+  const inner = useMemo(() => skillsConfig.filter((s) => s.orbitRadius <= 100), []);
+  const outer = useMemo(() => skillsConfig.filter((s) => s.orbitRadius > 100), []);
 
   const distributePhaseShift = (skills: typeof skillsConfig) => {
     const n = skills.length;
@@ -80,16 +87,21 @@ export const OrbitingSkills = ({
       phaseShift: (2 * Math.PI * i) / n,
     }));
   };
-  const distributedSkills = [...distributePhaseShift(inner), ...distributePhaseShift(outer)];
 
-  const scaledSkillsConfig = distributedSkills.map((config) => {
-    const isOuter = config.orbitRadius > 100;
-    return {
-      ...config,
-      orbitRadius: isOuter ? resolvedDiameter / 2.5 : resolvedDiameter / 4.5,
-      size: isOuter ? resolvedDiameter / 7 : resolvedDiameter / 9,
-    };
-  });
+  const distributedSkills = useMemo(() => [...distributePhaseShift(inner), ...distributePhaseShift(outer)], [inner, outer]);
+
+  const scaledSkillsConfig = useMemo(
+    () =>
+      distributedSkills.map((config: any) => {
+        const isOuter = config.orbitRadius > 100;
+        return {
+          ...config,
+          orbitRadius: isOuter ? resolvedDiameter / 2.5 : resolvedDiameter / 4.5,
+          size: isOuter ? resolvedDiameter / 7 : resolvedDiameter / 9,
+        };
+      }),
+    [distributedSkills, resolvedDiameter],
+  );
 
   // Central icon size calculation
   const iconSize = Math.max(resolvedDiameter / 6, 40);
@@ -144,8 +156,8 @@ export const OrbitingSkills = ({
       ))}
 
       {/* Render orbiting skill icons */}
-      {scaledSkillsConfig.map((config) => {
-        const angle = time * config.speed + (config.phaseShift || 0);
+      {scaledSkillsConfig.map((config: any) => {
+        const angle = timeRef.current * config.speed + (config.phaseShift || 0);
         return <OrbitingSkill key={config.id} config={config} angle={angle} />;
       })}
     </div>
