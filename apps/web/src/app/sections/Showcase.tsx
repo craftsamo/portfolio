@@ -61,7 +61,11 @@ export const ShowcaseSection = () => {
       aria-labelledby='showcase-title'
     >
       <Center className={cn('max-w-xs w-full mx-auto', 'sm:max-w-md', 'md:max-w-2xl', 'lg:max-w-4xl', 'xl:max-w-6xl')}>
-        <SparklesText text='Showcase' className={cn('text-3xl', 'sm:text-4xl', 'md:text-5xl', 'lg:text-6xl', 'xl:text-7xl')} />
+        <SparklesText
+          text='Showcase'
+          sparklesCount={5}
+          className={cn('text-3xl', 'sm:text-4xl', 'md:text-5xl', 'lg:text-6xl', 'xl:text-7xl')}
+        />
         <motion.div
           variants={item}
           className={cn(
