@@ -1,0 +1,105 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "apps/**"
+      - "packages/**"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "apps/**"
+      - "packages/**"
+  workflow_dispatch:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      web: ${{ steps.filter.outputs.web }}
+      dashboard: ${{ steps.filter.outputs.dashboard }}
+      games: ${{ steps.filter.outputs.games }}
+      web3: ${{ steps.filter.outputs.web3 }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+              - 'packages/**'
+            dashboard:
+              - 'apps/dashboard/**'
+              - 'packages/**'
+            games:
+              - 'apps/games/**'
+              - 'packages/**'
+            web3:
+              - 'apps/web3/**'
+              - 'packages/**'
+
+  setup:
+    runs-on: ubuntu-latest
+    needs: changes
+    outputs:
+      yarn-cache-dir-path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - name: Cache node modules
+        uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn global add turbo
+      - run: yarn install --frozen-lockfile
+
+  test:
+    needs: [setup, changes]
+    runs-on: ubuntu-latest
+    if: needs.setup.result == 'success'
+    strategy:
+      matrix:
+        include:
+          - target: web
+            run: ${{ needs.changes.outputs.web }}
+          - target: dashboard
+            run: ${{ needs.changes.outputs.dashboard }}
+          - target: games
+            run: ${{ needs.changes.outputs.games }}
+          - target: web3
+            run: ${{ needs.changes.outputs.web3 }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20.x
+      - name: Restore yarn cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ needs.setup.outputs['yarn-cache-dir-path'] }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn global add turbo
+      - name: Prepare
+        if: matrix.run == 'true'
+        run: npx nps prepare.ci.${{ matrix.target }}
+      - name: Build
+        if: matrix.run == 'true'
+        run: npx nps build.ci.${{ matrix.target }}
+      - name: Test
+        if: matrix.run == 'true'
+        run: npx nps test.ci.${{ matrix.target }}
