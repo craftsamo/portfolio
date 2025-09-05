@@ -70,6 +70,12 @@ module.exports = {
       games: "docker compose -f docker-compose.games.yml up --build",
       web3: "docker compose -f docker-compose.web3.yml up --build",
     },
-    dev: "npx turbo run dev",
+    dev: {
+      default: "npx turbo run dev",
+      web: "npx turbo run dev --filter=web",
+      dashboard: "npx turbo run dev --filter=dashboard",
+      games: "npx turbo run dev --filter=games",
+      web3: "npx turbo run dev --filter=web3",
+    },
   },
 };
