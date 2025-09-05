@@ -85,3 +85,6 @@
 - name: "🔄workflow: display-details"
   description: "Display detailed information"
   color: "5319E7"
+- name: "🔄workflow: tests"
+  description: "Test apps built in `apps/**`."
+  color: "5319E7"
